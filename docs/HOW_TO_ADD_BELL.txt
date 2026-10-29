@@ -1,0 +1,152 @@
+// ══════════════════════════════════════════════════════════════════
+// HOW TO ADD NOTIFICATION BELL TO HOME SCREENS
+// ══════════════════════════════════════════════════════════════════
+
+// In activity_home.xml and activity_landlord_home.xml
+// Find the top bar LinearLayout that has tvAvatar
+// ADD this bell icon TextView BEFORE the tvAvatar circle:
+
+/*
+<TextView
+    android:id="@+id/btnNotifications"
+    android:layout_width="42dp"
+    android:layout_height="42dp"
+    android:text="🔔"
+    android:textSize="20sp"
+    android:gravity="center"
+    android:layout_marginEnd="8dp"
+    android:clickable="true"
+    android:focusable="true" />
+*/
+
+// ══════════════════════════════════════════════════════════════════
+// HOW TO WIRE UP THE BELL IN HomeActivity.kt
+// ══════════════════════════════════════════════════════════════════
+
+// In setupClickListeners() add:
+/*
+try {
+    findViewById<TextView>(R.id.btnNotifications).setOnClickListener {
+        startActivity(Intent(this, NotificationsActivity::class.java))
+    }
+} catch (e: Exception) {}
+*/
+
+// Same in LandlordHomeActivity.kt setupClickListeners():
+/*
+try {
+    findViewById<TextView>(R.id.btnNotifications).setOnClickListener {
+        startActivity(Intent(this, NotificationsActivity::class.java))
+    }
+} catch (e: Exception) {}
+*/
+
+
+// ══════════════════════════════════════════════════════════════════
+// FIRESTORE SECURITY RULES — paste in Firebase Console → Rules
+// ══════════════════════════════════════════════════════════════════
+
+/*
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    match /users/{userId} {
+      allow read: if request.auth != null;
+      allow write: if request.auth != null && request.auth.uid == userId;
+    }
+
+    match /maintenanceRequests/{id} {
+      allow read, write: if request.auth != null;
+    }
+
+    match /payments/{id} {
+      allow read, write: if request.auth != null;
+    }
+
+    match /conversations/{convId} {
+      allow read, write: if request.auth != null;
+      match /messages/{msgId} {
+        allow read, write: if request.auth != null;
+      }
+    }
+
+    match /inviteCodes/{code} {
+      allow read, write: if request.auth != null;
+    }
+
+    match /notifications/{notifId} {
+      allow read, write: if request.auth != null;
+    }
+
+    match /documents/{docId} {
+      allow read, write: if request.auth != null;
+    }
+
+    match /adminNotifications/{id} {
+      allow write: if request.auth != null;
+      allow read: if false;
+    }
+  }
+}
+*/
+
+
+// ══════════════════════════════════════════════════════════════════
+// FIREBASE STORAGE RULES — paste in Firebase Console → Storage → Rules
+// ══════════════════════════════════════════════════════════════════
+
+/*
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+    match /documents/{userId}/{allPaths=**} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+    }
+  }
+}
+*/
+
+
+// ══════════════════════════════════════════════════════════════════
+// HOW THE FULL NOTIFICATION FLOW WORKS
+// ══════════════════════════════════════════════════════════════════
+
+/*
+TENANT SUBMITS MAINTENANCE:
+1. NewRequestActivity → calls FirebaseHelper.submitMaintenanceRequest()
+2. On success → calls notifyLandlords()
+3. Finds all landlords from Firestore
+4. For each landlord → saves a document to notifications collection
+5. The notification appears when landlord opens NotificationsActivity
+6. Push notification sent if landlord has FCM token
+
+LANDLORD ASSIGNS VENDOR:
+1. LandlordMaintenanceActivity → taps request → picks vendor
+2. Updates maintenanceRequests document with assignedVendor + status = "In Progress"
+3. Calls notifyTenantVendorAssigned()
+4. Saves document to notifications collection for tenant
+5. Calls sendPushToTenant() → shows local notification on device
+6. Tenant opens NotificationsActivity → sees "🔧 Vendor assigned..."
+
+LANDLORD MARKS RESOLVED:
+1. Taps "Mark as Resolved" in the dialog
+2. Updates status in Firestore
+3. Saves "✅ Issue resolved" notification for tenant
+4. Tenant gets notified
+
+IN-APP NOTIFICATIONS:
+- All notifications saved to Firestore: notifications/{id}
+- Fields: userId, title, body, type, read, createdAt
+- NotificationsActivity loads them for current user
+- Unread ones have blue background
+- Tapping goes to the relevant screen
+- "Clear all" deletes them from Firestore
+
+PUSH NOTIFICATIONS (for real push to work):
+- Currently: saves notification to Firestore + logs FCM token
+- For real push: go to Firebase Console → Extensions
+- Install "Trigger Email" or "Send FCM notifications"
+- OR set up a Cloud Function that triggers on
+  notifications collection write and sends FCM push
+*/

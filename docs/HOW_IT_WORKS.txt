@@ -1,0 +1,65 @@
+// ══════════════════════════════════════════════════════════════════
+// ADD THIS TO YOUR FIREBASE STORAGE RULES
+// Firebase Console → Storage → Rules → Publish
+// ══════════════════════════════════════════════════════════════════
+
+/*
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+    match /{allPaths=**} {
+      allow read, write: if request.auth != null;
+    }
+  }
+}
+*/
+
+// ══════════════════════════════════════════════════════════════════
+// ADD THIS TO YOUR FIRESTORE RULES
+// Firebase Console → Firestore → Rules → Publish
+// ══════════════════════════════════════════════════════════════════
+
+/*
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /{document=**} {
+      allow read, write: if request.auth != null;
+    }
+  }
+}
+*/
+
+// ══════════════════════════════════════════════════════════════════
+// HOW THE TENANT ISOLATION WORKS
+// ══════════════════════════════════════════════════════════════════
+
+/*
+TENANT sees ONLY their own requests:
+  MaintenanceActivity → queries maintenanceRequests
+  WHERE tenantId == myUid
+  → No other tenant's data ever loaded
+
+LANDLORD sees ONLY their tenants' requests:
+  LandlordMaintenanceActivity → Step 1: queries inviteCodes
+  WHERE landlordId == myUid AND used == true
+  → Gets list of tenantIds (usedBy field)
+  Step 2: queries maintenanceRequests
+  WHERE tenantId IN [tenantIds]
+  → Only this landlord's tenants' requests shown
+
+WHAT HAPPENS IF NO INVITE CODES:
+  Falls back to loading all requests (demo mode)
+  This only applies if landlord didn't use the invite code system
+
+IMAGE UPLOAD FLOW:
+  1. Tenant taps 📷 area in NewRequestActivity
+  2. File picker opens → selects photo
+  3. Preview shows in the form
+  4. On submit → image uploads to Firebase Storage:
+     path: maintenance_images/{uid}/{timestamp}.jpg
+  5. Gets download URL
+  6. Saves URL in maintenanceRequests document as "imageUrl"
+  7. Landlord sees "📷 Photo" badge on the request card
+  8. Landlord taps "📷 View photo" in detail dialog → opens in browser
+*/

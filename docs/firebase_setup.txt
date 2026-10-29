@@ -1,0 +1,143 @@
+// ═══════════════════════════════════════════════════════════
+// STEP 1 — Add Firebase to your project
+// ═══════════════════════════════════════════════════════════
+
+// Go to: https://console.firebase.google.com
+// 1. Click "Add project" → name it "RentEase" → Continue
+// 2. Disable Google Analytics (not needed now) → Create project
+// 3. Click the Android icon to add an Android app
+// 4. Package name: com.example.rentease
+// 5. App nickname: RentEase
+// 6. Click "Register app"
+// 7. Download google-services.json
+// 8. Copy google-services.json into your app/ folder
+//    (drag it into the "app" folder in Android Studio Project view)
+
+// ═══════════════════════════════════════════════════════════
+// STEP 2 — Enable Firebase services in console
+// ═══════════════════════════════════════════════════════════
+
+// In Firebase Console:
+// → Authentication → Get started → Email/Password → Enable → Save
+// → Firestore Database → Create database → Start in test mode → Next → Enable
+// → Storage → Get started → Start in test mode → Done
+
+// ═══════════════════════════════════════════════════════════
+// STEP 3 — libs.versions.toml  (replace entire file)
+// ═══════════════════════════════════════════════════════════
+
+[versions]
+agp = "8.9.0"
+kotlin = "2.0.0"
+coreKtx = "1.13.1"
+junit = "4.13.2"
+junitVersion = "1.2.1"
+espressoCore = "3.6.1"
+appcompat = "1.7.0"
+material = "1.13.0"
+constraintlayout = "2.1.4"
+cardview = "1.0.0"
+coordinatorlayout = "1.2.0"
+recyclerview = "1.3.2"
+firebaseBom = "33.1.0"
+googleServices = "4.4.2"
+
+[libraries]
+androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+junit = { group = "junit", name = "junit", version.ref = "junit" }
+androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
+androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
+androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
+material = { group = "com.google.android.material", name = "material", version.ref = "material" }
+androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
+androidx-cardview = { group = "androidx.cardview", name = "cardview", version.ref = "cardview" }
+androidx-coordinatorlayout = { group = "androidx.coordinatorlayout", name = "coordinatorlayout", version.ref = "coordinatorlayout" }
+androidx-recyclerview = { group = "androidx.recyclerview", name = "recyclerview", version.ref = "recyclerview" }
+firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version.ref = "firebaseBom" }
+firebase-auth = { group = "com.google.firebase", name = "firebase-auth-ktx" }
+firebase-firestore = { group = "com.google.firebase", name = "firebase-firestore-ktx" }
+firebase-storage = { group = "com.google.firebase", name = "firebase-storage-ktx" }
+firebase-messaging = { group = "com.google.firebase", name = "firebase-messaging-ktx" }
+
+[plugins]
+android-application = { id = "com.android.application", version.ref = "agp" }
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+google-services = { id = "com.google.gms.google-services", version.ref = "googleServices" }
+
+// ═══════════════════════════════════════════════════════════
+// STEP 4 — build.gradle.kts (Project level) — replace all
+// ═══════════════════════════════════════════════════════════
+
+plugins {
+    alias(libs.plugins.android.application) apply false
+    alias(libs.plugins.kotlin.android) apply false
+    alias(libs.plugins.google.services) apply false
+}
+
+// ═══════════════════════════════════════════════════════════
+// STEP 5 — build.gradle.kts (Module: app) — replace all
+// ═══════════════════════════════════════════════════════════
+
+plugins {
+    alias(libs.plugins.android.application)
+    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.google.services)
+}
+
+android {
+    namespace = "com.example.rentease"
+    compileSdk = 35
+
+    defaultConfig {
+        applicationId = "com.example.rentease"
+        minSdk = 24
+        targetSdk = 35
+        versionCode = 1
+        versionName = "1.0"
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            isMinifyEnabled = false
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
+    }
+
+    kotlinOptions {
+        jvmTarget = "11"
+    }
+
+    buildFeatures {
+        viewBinding = false
+    }
+}
+
+dependencies {
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.appcompat)
+    implementation(libs.material)
+    implementation(libs.androidx.constraintlayout)
+    implementation(libs.androidx.cardview)
+    implementation(libs.androidx.coordinatorlayout)
+    implementation(libs.androidx.recyclerview)
+
+    // Firebase
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.auth)
+    implementation(libs.firebase.firestore)
+    implementation(libs.firebase.storage)
+    implementation(libs.firebase.messaging)
+
+    testImplementation(libs.junit)
+    androidTestImplementation(libs.androidx.junit)
+    androidTestImplementation(libs.androidx.espresso.core)
+}

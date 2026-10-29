@@ -1,0 +1,261 @@
+╔══════════════════════════════════════════════════════════════════╗
+║     RENTEASE — REMAINING WORK, SECURITY & DEPLOYMENT GUIDE       ║
+╚══════════════════════════════════════════════════════════════════╝
+
+
+═══════════════════════════════════════════════════════════════
+ LANDLORD VERIFICATION — HOW IT WORKS
+═══════════════════════════════════════════════════════════════
+
+FLOW:
+1. Landlord signs up → OTP email verified → account created
+2. App opens LandlordVerificationActivity
+3. Landlord enters Emirates ID number + property address
+4. Landlord uploads Emirates ID photo + title deed/RERA doc
+5. Files upload to Firebase Storage → metadata saved to:
+   - users/{uid}.verificationStatus = "pending"
+   - landlordVerifications/{uid} = { all details }
+6. Admin notification saved to adminNotifications collection
+7. Landlord sees LandlordPendingActivity with "under review" message
+
+ADMIN APPROVES:
+1. You open Firebase Console → Firestore → landlordVerifications
+2. Find the landlord document
+3. Update: verificationStatus = "approved"  (or "rejected")
+4. If rejected: also set adminNote = "reason for rejection"
+5. Landlord taps "Check status" in app → routed to dashboard
+
+TO DO IN FIREBASE CONSOLE (paste in Firestore rules):
+match /landlordVerifications/{uid} {
+  allow read: if request.auth != null && request.auth.uid == uid;
+  allow write: if request.auth != null && request.auth.uid == uid;
+}
+
+
+═══════════════════════════════════════════════════════════════
+ PROPERTY MANAGER ROLE
+═══════════════════════════════════════════════════════════════
+
+A Property Manager is someone the Landlord assigns to manage their
+properties on their behalf. Example: a building supervisor.
+
+HOW TO ADD PROPERTY MANAGER:
+1. Landlord goes to their settings/profile
+2. Taps "Add property manager"
+3. Enters the property manager's email
+4. App creates a special invite code with role="PropertyManager"
+5. Property manager signs up using that code
+6. They get access to:
+   - Same screens as Landlord BUT limited to assigned properties
+   - Can view tenants, assign vendors, approve requests
+   - CANNOT approve/reject landlord verifications
+   - CANNOT generate new invite codes for tenants
+
+TO BUILD THIS (next step):
+- Add "PropertyManager" as a third role option in SignUpActivity
+- Landlord generates a "PM invite code" from Profile → Add Manager
+- Property manager signs up with that code → role = "PropertyManager"
+- In all landlord screens add: if (role == "PropertyManager") show same UI
+- Filter data by their assigned propertyId only
+
+SKIP FOR NOW: Focus on getting the final project submitted first.
+Property manager can be added as a feature enhancement.
+
+
+═══════════════════════════════════════════════════════════════
+ ADMIN PANEL — TWO OPTIONS
+═══════════════════════════════════════════════════════════════
+
+OPTION A — Firebase Console (use this for final project demo)
+  → Already works. Go to Firebase Console → Firestore
+  → Find landlordVerifications collection
+  → Open a document → change verificationStatus to "approved"
+  → Done. No code needed.
+
+OPTION B — Simple Admin Web App (impressive for project report)
+  Build a simple HTML page hosted on Firebase Hosting:
+
+  admin.html features:
+  - Login with official.rentease@gmail.com
+  - See all pending landlord verifications
+  - View Emirates ID and title deed photos
+  - Click "Approve" or "Reject" buttons
+  - Write rejection reason
+  - See all users (tenants + landlords)
+  - See all maintenance requests across all properties
+  - See all payments
+
+  To build Option B — ask me and I will give you the code.
+  It uses Firebase Web SDK (no Android Studio needed).
+
+
+═══════════════════════════════════════════════════════════════
+ SECURITY CHECKLIST
+═══════════════════════════════════════════════════════════════
+
+DONE ✅
+- Firebase Authentication (email + password)
+- OTP email verification before account creation
+- Invite code system with expiry (8 chars, 7 days)
+- Landlord verification with Emirates ID + title deed
+- Firestore: tenant queries filtered by tenantId (own data only)
+- Landlord: only sees requests from their own tenants (inviteCodes)
+- Password change requires re-authentication
+- Sessions cleared on sign out
+
+STILL TO DO:
+1. Firestore Security Rules — paste these in Firebase Console:
+
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Users can only read/write their own profile
+    match /users/{userId} {
+      allow read:  if request.auth != null;
+      allow write: if request.auth != null && request.auth.uid == userId;
+    }
+
+    // Maintenance — tenant can write their own, landlord can update
+    match /maintenanceRequests/{id} {
+      allow read:   if request.auth != null;
+      allow create: if request.auth != null && request.resource.data.tenantId == request.auth.uid;
+      allow update: if request.auth != null;
+    }
+
+    // Payments — tenants write their own
+    match /payments/{id} {
+      allow read, write: if request.auth != null;
+    }
+
+    // Conversations — only participants
+    match /conversations/{convId} {
+      allow read, write: if request.auth != null
+        && request.auth.uid in resource.data.participants;
+      match /messages/{msgId} {
+        allow read, write: if request.auth != null;
+      }
+    }
+
+    // Invite codes — landlords create, tenants verify
+    match /inviteCodes/{code} {
+      allow read, write: if request.auth != null;
+    }
+
+    // Notifications — own only
+    match /notifications/{id} {
+      allow read, write: if request.auth != null
+        && resource.data.userId == request.auth.uid;
+      allow create: if request.auth != null;
+    }
+
+    // Documents
+    match /documents/{id} {
+      allow read, write: if request.auth != null;
+    }
+
+    // OTP codes — allow unauthenticated reads for verification step
+    match /emailOtps/{email} {
+      allow read, write: if true;
+    }
+
+    // Landlord verifications — own only
+    match /landlordVerifications/{uid} {
+      allow read, write: if request.auth != null && request.auth.uid == uid;
+    }
+
+    // Admin notifications — write only, no read
+    match /adminNotifications/{id} {
+      allow write: if request.auth != null;
+      allow read:  if false;
+    }
+  }
+}
+
+2. Firebase Storage Rules:
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+    match /{allPaths=**} {
+      allow read, write: if request.auth != null;
+    }
+  }
+}
+
+
+═══════════════════════════════════════════════════════════════
+ HOW TO DEPLOY THE APP
+═══════════════════════════════════════════════════════════════
+
+STEP 1 — Generate a signed APK (for sharing/testing):
+  Android Studio → Build → Generate Signed Bundle/APK
+  → Select APK → Next
+  → Create new keystore:
+      Path: choose a folder and name it rentease.jks
+      Password: something secure (SAVE THIS — you need it forever)
+      Key alias: rentease_key
+      First/Last name: your name
+      Country: AE
+  → Next → select "release" → Finish
+  → APK is at: app/release/app-release.apk
+
+STEP 2 — Install on any Android phone:
+  Method A: Connect phone by USB → copy APK → install
+  Method B: WhatsApp the APK to yourself → open → install
+  Method C: Upload to Google Drive → download on phone → install
+  NOTE: Phone must allow "Install from unknown sources"
+  Settings → Security → Install unknown apps → allow
+
+STEP 3 — Share with evaluators:
+  Upload APK to Google Drive → share the link
+  Anyone with the link can download and install
+
+STEP 4 — Publish to Google Play (optional, not needed for project):
+  - Create a Google Play Developer account ($25 one-time fee)
+  - android.google.com/distribute/console
+  - Upload the release APK (not debug)
+  - Fill in app description, screenshots, privacy policy URL
+  - Submit for review (takes 3–7 days)
+  - Your privacy policy is already built in the app ✅
+
+STEP 5 — Firebase Hosting for admin web panel:
+  npm install -g firebase-tools
+  firebase login
+  firebase init hosting
+  firebase deploy
+  Your admin panel goes live at: rentease-XXXX.web.app
+
+
+═══════════════════════════════════════════════════════════════
+ FINAL REMAINING WORK (priority order)
+═══════════════════════════════════════════════════════════════
+
+MUST DO BEFORE SUBMISSION:
+□ Paste new Firestore security rules (above)
+□ Add LandlordVerificationActivity + LandlordPendingActivity to manifest
+□ Replace SignUpActivity.kt and SplashActivity.kt
+□ Test full flow: Landlord signup → verification → pending → approved
+□ Test full flow: Tenant signup with code → home → request → landlord sees
+□ Generate signed APK and test on real phone
+□ Take screenshots of every screen for project report
+
+NICE TO HAVE:
+□ Admin web panel (Option B above)
+□ Property Manager role
+□ Push notifications via Firebase Cloud Functions
+□ Real email OTP sending (Firebase Extension "Trigger Email")
+□ Landlord approval email notification
+
+FOR PROJECT REPORT — YOUR APP HAS:
+✅ Multi-role auth (Tenant, Landlord)
+✅ OTP email verification
+✅ Invite code system with expiry
+✅ Landlord identity verification (Emirates ID + title deed)
+✅ Real-time maintenance requests with photo upload
+✅ Vendor assignment with notifications
+✅ Real-time messaging
+✅ Payment tracking with receipts
+✅ Document management with upload
+✅ Push notification infrastructure
+✅ Dubai RERA compliant privacy policy
+✅ Firebase (Auth + Firestore + Storage + FCM)

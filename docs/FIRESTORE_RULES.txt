@@ -1,0 +1,115 @@
+══════════════════════════════════════════════════════════════════
+ FIREBASE SECURITY RULES — PASTE THESE NOW
+══════════════════════════════════════════════════════════════════
+
+─────────────────────────────────────────────────────────────────
+STEP 1 of 2: FIRESTORE DATABASE RULES
+─────────────────────────────────────────────────────────────────
+
+WHERE TO GO:
+  console.firebase.google.com
+  → Your Project
+  → Firestore Database (left menu)
+  → Rules tab (top of Firestore page)
+  → Delete ALL existing text
+  → Paste everything between the lines below
+  → Click "Publish"
+
+════════ COPY FROM HERE ════════════════════════════════════════
+
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    match /users/{userId} {
+      allow read:  if request.auth != null;
+      allow write: if request.auth != null && request.auth.uid == userId;
+    }
+
+    match /maintenanceRequests/{id} {
+      allow read:   if request.auth != null;
+      allow create: if request.auth != null
+                    && request.resource.data.tenantId == request.auth.uid;
+      allow update: if request.auth != null;
+      allow delete: if false;
+    }
+
+    match /payments/{id} {
+      allow read, write: if request.auth != null;
+    }
+
+    match /conversations/{convId} {
+      allow read, write: if request.auth != null;
+      match /messages/{msgId} {
+        allow read, write: if request.auth != null;
+      }
+    }
+
+    match /inviteCodes/{code} {
+      allow read, write: if request.auth != null;
+    }
+
+    match /notifications/{id} {
+      allow create: if request.auth != null;
+      allow read, update, delete: if request.auth != null
+        && resource.data.userId == request.auth.uid;
+    }
+
+    match /documents/{id} {
+      allow read, write: if request.auth != null;
+    }
+
+    match /emailOtps/{email} {
+      allow read, write: if true;
+    }
+
+    match /mail/{id} {
+      allow write: if request.auth != null || true;
+      allow read:  if false;
+    }
+
+    match /landlordVerifications/{uid} {
+      allow read, write: if request.auth != null;
+    }
+
+    match /adminNotifications/{id} {
+      allow write: if request.auth != null;
+      allow read:  if request.auth != null;
+    }
+  }
+}
+
+════════ COPY UP TO HERE ═══════════════════════════════════════
+
+Click PUBLISH. Wait for "Rules published" message.
+
+
+─────────────────────────────────────────────────────────────────
+STEP 2 of 2: FIREBASE STORAGE RULES
+─────────────────────────────────────────────────────────────────
+
+WHERE TO GO:
+  console.firebase.google.com
+  → Your Project
+  → Storage (left menu)
+  → Rules tab
+  → Delete ALL existing text
+  → Paste everything between the lines below
+  → Click "Publish"
+
+════════ COPY FROM HERE ════════════════════════════════════════
+
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+    match /{allPaths=**} {
+      allow read, write: if request.auth != null;
+    }
+  }
+}
+
+════════ COPY UP TO HERE ═══════════════════════════════════════
+
+Click PUBLISH.
+
+That's it. Both rules are now live.

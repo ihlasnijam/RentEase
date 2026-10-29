@@ -1,0 +1,161 @@
+══════════════════════════════════════════════════════════════════
+ WHERE TO FIND LANDLORD VERIFICATION DOCUMENTS
+══════════════════════════════════════════════════════════════════
+
+When a landlord submits their Emirates ID and title deed, the files
+are uploaded to Firebase Storage. Here is exactly how to find them:
+
+─────────────────────────────────────────────────────────────────
+METHOD 1 — Firebase Storage (view the actual files)
+─────────────────────────────────────────────────────────────────
+
+1. Open console.firebase.google.com
+2. Click your RentEase project
+3. In the left menu click "Storage"
+4. Click the "Files" tab
+5. You will see a folder called "verification"
+6. Click it → you see folders named by user UID
+7. Click any folder → you will see:
+   - emirates_id_XXXXXXXXX   (photo of Emirates ID)
+   - title_deed_XXXXXXXXX    (photo of title deed / RERA document)
+8. Click any file → it opens a preview on the right side
+9. You can also click "Download" to save it to your computer
+10. Or click the link icon to get a URL to open in browser
+
+─────────────────────────────────────────────────────────────────
+METHOD 2 — Firestore Database (see landlord details + links)
+─────────────────────────────────────────────────────────────────
+
+1. Open console.firebase.google.com → your project
+2. Click "Firestore Database" in left menu
+3. Click the "landlordVerifications" collection
+4. You will see one document per landlord (named by their UID)
+5. Click any document → you see all their details:
+   - name, email, phone
+   - emiratesIdNumber (what they typed)
+   - propertyAddress
+   - emiratesIdUrl ← click this URL to open their Emirates ID photo
+   - titleDeedUrl  ← click this URL to open their title deed photo
+   - status (pending / approved / rejected)
+   - submittedAt (timestamp)
+6. To approve: click the pencil on "status" → change to "approved"
+7. Also go to users collection → find same UID → change verificationStatus to "approved"
+
+─────────────────────────────────────────────────────────────────
+METHOD 3 — Admin web panel (admin.html)
+─────────────────────────────────────────────────────────────────
+
+Once you paste your Firebase config into admin.html and open it:
+1. Click "Landlord Verifications" tab
+2. Click "Review" on any pending landlord
+3. The modal shows all their details
+4. Click "📋 View Emirates ID" → opens the photo in a new tab
+5. Click "📄 View Title Deed"  → opens the document in a new tab
+6. Click Approve or Reject
+
+
+══════════════════════════════════════════════════════════════════
+ HOW TO GET ADMIN EMAILS WHEN LANDLORD SUBMITS DOCUMENTS
+══════════════════════════════════════════════════════════════════
+
+When a landlord submits verification documents, the app saves a
+document to the "mail" collection in Firestore. To get real emails:
+
+SETUP (one time, 10 minutes):
+─────────────────────────────
+1. Firebase Console → left menu → Extensions
+2. Search "Trigger Email"
+3. Click Install
+4. Click "Get started" → billing: select Spark (free) or Blaze
+5. SMTP settings — use Gmail:
+   - SMTP connection URI: smtps://official.rentease@gmail.com:PASSWORD@smtp.gmail.com:465
+   - Email documents collection: mail
+6. Click Install extension → wait 3 minutes
+
+After setup:
+- Every document added to the "mail" collection triggers a real email
+- Landlord verification → you get an email at official.rentease@gmail.com
+- OTP codes → tenants get their codes by email (no more demo mode)
+
+GMAIL NOTE: Gmail may block direct SMTP. If so:
+1. Go to myaccount.google.com → Security
+2. Turn on 2-Factor Authentication
+3. Go to App Passwords → create one for "Mail"
+4. Use that app password in the SMTP URI above
+
+
+══════════════════════════════════════════════════════════════════
+ HOW TO FIX ADMIN.HTML IF IT'S NOT WORKING
+══════════════════════════════════════════════════════════════════
+
+The most common reason admin.html does not work is the Firebase
+config is not pasted in. Here is how to fix:
+
+STEP 1: Get your Firebase config
+1. Firebase Console → click the ⚙️ gear → Project settings
+2. Scroll down to "Your apps"
+3. If you don't see a web app, click "Add app" → Web (</> icon)
+4. Register the app (call it "admin")
+5. You will see a config block like:
+   const firebaseConfig = {
+     apiKey: "AIzaSy...",
+     authDomain: "...",
+     projectId: "...",
+     ...
+   };
+6. Copy everything inside the curly braces { }
+
+STEP 2: Paste into admin.html
+1. Open admin.html in VS Code or Notepad
+2. Find this section near the bottom:
+   const cfg = {
+     apiKey:            "PASTE_YOUR_API_KEY_HERE",
+     authDomain:        "PASTE_YOUR_AUTH_DOMAIN_HERE",
+     ...
+   };
+3. Replace each "PASTE_YOUR_..." with your real values
+4. Save the file
+
+STEP 3: Open in Chrome
+1. Double-click admin.html → it opens in browser
+2. Sign in with official.rentease@gmail.com + your password
+3. If it says "Wrong password" → you need to create the admin
+   account first in Firebase Auth:
+   Firebase Console → Authentication → Users → Add user
+   Email: official.rentease@gmail.com
+   Password: choose something secure
+
+STEP 4: If you see "Permission denied" errors
+1. Make sure Firestore rules are published (Step 1 from SETUP guide)
+2. The admin email rule in Firestore allows the admin to read
+   landlordVerifications documents
+
+STEP 5: If you see CORS errors in console
+→ This means you need to open the file differently
+→ Install VS Code → install "Live Server" extension
+→ Right-click admin.html → "Open with Live Server"
+→ It opens at localhost:5500 which avoids CORS issues
+
+
+══════════════════════════════════════════════════════════════════
+ APPROVE ALL EXISTING PENDING LANDLORDS (Quick fix)
+══════════════════════════════════════════════════════════════════
+
+If landlords signed up before the verification system was added,
+they have no verificationStatus field and are stuck.
+
+Quick fix — do this in Firebase Console:
+
+1. Firestore → users collection
+2. Click each landlord document (look for role = "Landlord")
+3. Check if they have "verificationStatus" field
+4. If YES and it says "pending" → change it to "approved"
+5. If NO field exists → click "Add field":
+   Field name: verificationStatus
+   Type: string
+   Value: approved
+6. Repeat for every landlord
+
+The app's SplashActivity already handles missing field = approved,
+so old accounts get through automatically. Only NEW landlords
+after this update will be required to verify.

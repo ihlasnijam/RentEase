@@ -1,0 +1,210 @@
+╔══════════════════════════════════════════════════════════════╗
+║           RENTEASE — COMPLETE PROJECT CHECKLIST              ║
+╚══════════════════════════════════════════════════════════════╝
+
+═══════════════════════════════════════════════
+ DONE ✅
+═══════════════════════════════════════════════
+
+SCREENS BUILT:
+✅ Splash screen (with animated dots)
+✅ Login screen (with logo)
+✅ Sign up screen (tenant + landlord role)
+✅ Tenant home dashboard
+✅ Maintenance requests list
+✅ New request form
+✅ Payments screen
+✅ Messages screen
+✅ Profile & settings screen
+✅ Landlord home dashboard
+✅ Landlord properties screen
+✅ Landlord tenants screen
+✅ Landlord maintenance queue
+
+FEATURES BUILT:
+✅ Role-based routing (Tenant vs Landlord)
+✅ Dynamic greeting (morning/afternoon/evening)
+✅ Bottom navigation
+✅ Avatar with initials
+✅ Progress bars on requests
+✅ Status badges (Paid, Pending, Overdue, Urgent)
+✅ Sign out with confirmation dialog
+✅ Form validation (empty fields, password match)
+✅ Category & priority selectors
+✅ App logo (SVG icon)
+✅ App launcher icon replacement guide
+
+
+═══════════════════════════════════════════════
+ FIREBASE (done with these files)
+═══════════════════════════════════════════════
+✅ FirebaseHelper.kt — all database operations
+✅ SessionManager.kt — local user session
+✅ Login connected to Firebase Auth
+✅ Sign up saves to Firestore
+✅ Maintenance request saves to Firestore
+✅ Splash auto-routes based on login state
+✅ Sign out clears Firebase + local session
+✅ Real name shown as greeting
+
+
+═══════════════════════════════════════════════
+ STILL TO DO (do these in order)
+═══════════════════════════════════════════════
+
+PRIORITY 1 — Connect remaining screens to Firebase:
+
+1. MaintenanceActivity.kt
+   → Load real requests from Firestore for logged-in tenant
+   → Use FirebaseHelper.getTenantRequests()
+
+2. PaymentsActivity.kt
+   → Load real payment history from Firestore
+   → Use FirebaseHelper.getTenantPayments()
+
+3. LandlordMaintenanceActivity.kt
+   → Load all requests from Firestore
+   → Use FirebaseHelper.getAllRequests()
+
+4. LandlordTenantsActivity.kt
+   → Load real tenants from Firestore
+   → Use FirebaseHelper.getAllTenants()
+
+
+PRIORITY 2 — Important features to add:
+
+5. Invite code system for tenants
+   → When landlord adds a unit, generate a 6-digit code
+   → Tenant enters code during signup to link to property
+   → Save code in Firestore under properties collection
+
+6. Real-time messages
+   → MessagesActivity loads conversations from Firestore
+   → Use FirebaseHelper.sendMessage()
+   → Add real-time listener with .addSnapshotListener()
+
+7. Push notifications
+   → When maintenance request is submitted → notify landlord
+   → When landlord responds → notify tenant
+   → Use Firebase Cloud Messaging (FCM) already in dependencies
+
+
+PRIORITY 3 — Polish before submission:
+
+8. Loading indicators
+   → Add ProgressBar to each screen while data loads
+   → Show "No requests yet" empty state if list is empty
+
+9. Error handling
+   → Show friendly message if no internet connection
+   → Retry button if Firebase call fails
+
+10. Input validation improvements
+    → Email format check on login
+    → Phone number format check on signup
+
+
+PRIORITY 4 — Final project submission extras:
+
+11. Admin panel (optional but impressive)
+    → Simple web page or separate app for you (developer)
+    → View all users, approve landlord accounts
+    → Can be done with Firebase Console directly
+
+12. README document
+    → How to install the app
+    → Features list
+    → Architecture explanation (Firebase + Android)
+    → Screenshots of each screen
+
+13. APK generation
+    → Build → Generate Signed Bundle/APK
+    → Choose APK → Create new keystore
+    → This gives you an installable APK for demo
+
+
+═══════════════════════════════════════════════
+ FIRESTORE DATABASE STRUCTURE
+═══════════════════════════════════════════════
+
+users/
+  {uid}/
+    name, email, phone, role, createdAt
+
+properties/
+  {propertyId}/
+    name, address, landlordId, totalUnits
+    inviteCode (for tenant to join)
+
+units/
+  {unitId}/
+    propertyId, unitNumber, tenantId, rentAmount
+    leaseStart, leaseEnd, status (occupied/vacant)
+
+maintenanceRequests/
+  {requestId}/
+    tenantId, tenantName, category, location
+    description, priority, status, createdAt
+    assignedVendor (optional)
+
+payments/
+  {paymentId}/
+    tenantId, tenantName, amount, month
+    status, paidAt
+
+messages/
+  {conversationId}/
+    chats/
+      {messageId}/
+        senderId, senderName, message, timestamp
+
+
+═══════════════════════════════════════════════
+ HOW TO GENERATE APK FOR DEMO
+═══════════════════════════════════════════════
+
+1. Build → Generate Signed Bundle/APK
+2. Select APK → Next
+3. Click "Create new" keystore
+4. Fill in keystore details (remember the password!)
+5. Key alias: rentease
+6. Click OK → Next
+7. Select "debug" → Create
+8. APK saved in app/release/ folder
+9. Copy to phone via USB or WhatsApp it to yourself
+10. Install on real phone for demo!
+
+
+═══════════════════════════════════════════════
+ FIREBASE SECURITY RULES (paste in console)
+═══════════════════════════════════════════════
+
+// Firestore Rules → go to Firebase Console → Firestore → Rules
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Users can only read/write their own data
+    match /users/{userId} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+    }
+
+    // Tenants can read/write their own requests
+    // Landlords can read all requests
+    match /maintenanceRequests/{requestId} {
+      allow read: if request.auth != null;
+      allow write: if request.auth != null;
+    }
+
+    // Payments
+    match /payments/{paymentId} {
+      allow read: if request.auth != null;
+      allow write: if request.auth != null;
+    }
+
+    // Messages
+    match /messages/{conversationId}/chats/{messageId} {
+      allow read, write: if request.auth != null;
+    }
+  }
+}

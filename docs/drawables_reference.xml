@@ -1,0 +1,109 @@
+<!-- ═══════════════════════════════════════════════════════════════════
+     DRAWABLE FILES — create each block as a separate file in res/drawable/
+     ═══════════════════════════════════════════════════════════════════ -->
+
+
+<!-- ── bg_avatar.xml ──────────────────────────────────────────────────── -->
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="oval">
+    <solid android:color="@color/teal_light" />
+</shape>
+
+
+<!-- ── bg_hero_chip.xml ───────────────────────────────────────────────── -->
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <solid android:color="#29FFFFFF" />
+    <corners android:radius="12dp" />
+</shape>
+
+
+<!-- ── bg_metric_card.xml ─────────────────────────────────────────────── -->
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <solid android:color="@color/bg_metric" />
+    <corners android:radius="14dp" />
+</shape>
+
+
+<!-- ── bg_badge_teal.xml ──────────────────────────────────────────────── -->
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <solid android:color="@color/teal_light" />
+    <corners android:radius="20dp" />
+</shape>
+
+
+<!-- ── bg_badge_amber.xml ─────────────────────────────────────────────── -->
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <solid android:color="@color/amber_light" />
+    <corners android:radius="20dp" />
+</shape>
+
+
+<!-- ── bg_badge_green.xml ─────────────────────────────────────────────── -->
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <solid android:color="@color/green_light" />
+    <corners android:radius="20dp" />
+</shape>
+
+
+<!-- ── bg_badge_red.xml ───────────────────────────────────────────────── -->
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <solid android:color="@color/red_light" />
+    <corners android:radius="20dp" />
+</shape>
+
+
+<!-- ── bg_icon_teal.xml ───────────────────────────────────────────────── -->
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <solid android:color="@color/teal_light" />
+    <corners android:radius="10dp" />
+</shape>
+
+
+<!-- ── bg_icon_amber.xml ──────────────────────────────────────────────── -->
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <solid android:color="@color/amber_light" />
+    <corners android:radius="10dp" />
+</shape>
+
+
+<!-- ── bg_icon_green.xml ──────────────────────────────────────────────── -->
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <solid android:color="@color/green_light" />
+    <corners android:radius="10dp" />
+</shape>
+
+
+<!-- ── bg_icon_purple.xml ─────────────────────────────────────────────── -->
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <solid android:color="@color/purple_light" />
+    <corners android:radius="10dp" />
+</shape>
+
+
+<!-- ── bottom_nav_tint.xml  (selector) ───────────────────────────────── -->
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:color="@color/teal"         android:state_checked="true" />
+    <item android:color="@color/text_secondary" />
+</selector>
