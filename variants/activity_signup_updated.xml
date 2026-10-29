@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingLeft="24dp"
+        android:paddingRight="24dp"
+        android:paddingTop="64dp"
+        android:paddingBottom="40dp">
+
+        <!-- Back button -->
+        <LinearLayout
+            android:id="@+id/btnBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="32dp"
+            android:clickable="true"
+            android:focusable="true">
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="←" android:textSize="18sp" android:textColor="@color/blue_primary" android:layout_marginEnd="6dp" />
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Back to sign in" android:textSize="14sp" android:textColor="@color/blue_primary" />
+        </LinearLayout>
+
+        <!-- Title -->
+        <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Create account" android:textSize="24sp" android:textStyle="bold" android:textColor="@color/navy" android:gravity="center" android:layout_marginBottom="8dp" />
+        <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Fill in your details to get started" android:textSize="14sp" android:textColor="@color/text_muted" android:gravity="center" android:layout_marginBottom="32dp" />
+
+        <!-- Full name -->
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Full name" android:textSize="13sp" android:textStyle="bold" android:textColor="@color/navy" android:layout_marginBottom="8dp" />
+        <EditText android:id="@+id/etFullName" android:layout_width="match_parent" android:layout_height="52dp" android:background="@drawable/bg_input" android:paddingLeft="14dp" android:paddingRight="14dp" android:hint="Ahmed Salim" android:textSize="14sp" android:textColor="@color/navy" android:inputType="textPersonName" android:layout_marginBottom="18dp" />
+
+        <!-- Email -->
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Email address" android:textSize="13sp" android:textStyle="bold" android:textColor="@color/navy" android:layout_marginBottom="8dp" />
+        <EditText android:id="@+id/etEmail" android:layout_width="match_parent" android:layout_height="52dp" android:background="@drawable/bg_input" android:paddingLeft="14dp" android:paddingRight="14dp" android:hint="you@example.com" android:textSize="14sp" android:textColor="@color/navy" android:inputType="textEmailAddress" android:layout_marginBottom="18dp" />
+
+        <!-- Phone -->
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Phone number" android:textSize="13sp" android:textStyle="bold" android:textColor="@color/navy" android:layout_marginBottom="8dp" />
+        <EditText android:id="@+id/etPhone" android:layout_width="match_parent" android:layout_height="52dp" android:background="@drawable/bg_input" android:paddingLeft="14dp" android:paddingRight="14dp" android:hint="+971 50 000 0000" android:textSize="14sp" android:textColor="@color/navy" android:inputType="phone" android:layout_marginBottom="18dp" />
+
+        <!-- Password -->
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Password" android:textSize="13sp" android:textStyle="bold" android:textColor="@color/navy" android:layout_marginBottom="8dp" />
+        <EditText android:id="@+id/etPassword" android:layout_width="match_parent" android:layout_height="52dp" android:background="@drawable/bg_input" android:paddingLeft="14dp" android:paddingRight="14dp" android:hint="Min. 6 characters" android:textSize="14sp" android:textColor="@color/navy" android:inputType="textPassword" android:layout_marginBottom="18dp" />
+
+        <!-- Confirm password -->
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Confirm password" android:textSize="13sp" android:textStyle="bold" android:textColor="@color/navy" android:layout_marginBottom="8dp" />
+        <EditText android:id="@+id/etConfirmPassword" android:layout_width="match_parent" android:layout_height="52dp" android:background="@drawable/bg_input" android:paddingLeft="14dp" android:paddingRight="14dp" android:hint="Re-enter your password" android:textSize="14sp" android:textColor="@color/navy" android:inputType="textPassword" android:layout_marginBottom="24dp" />
+
+        <!-- Role selector -->
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="I am a" android:textSize="13sp" android:textStyle="bold" android:textColor="@color/navy" android:layout_marginBottom="10dp" />
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:weightSum="2" android:layout_marginBottom="20dp">
+            <TextView android:id="@+id/roleTenant" android:layout_width="0dp" android:layout_height="52dp" android:layout_weight="1" android:text="Tenant" android:textSize="14sp" android:textStyle="bold" android:textColor="@color/blue_dark" android:background="@drawable/bg_badge_blue" android:gravity="center" android:layout_marginEnd="8dp" android:clickable="true" android:focusable="true" />
+            <TextView android:id="@+id/roleLandlord" android:layout_width="0dp" android:layout_height="52dp" android:layout_weight="1" android:text="Landlord" android:textSize="14sp" android:textColor="@color/text_muted" android:background="@drawable/bg_stat_card" android:gravity="center" android:clickable="true" android:focusable="true" />
+        </LinearLayout>
+
+        <!-- ── INVITE CODE FIELD (shown for Tenant only) ── -->
+        <LinearLayout
+            android:id="@+id/llInviteCode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="visible">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Invite code"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                android:textColor="@color/navy"
+                android:layout_marginBottom="8dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Enter the 6-digit code provided by your landlord"
+                android:textSize="12sp"
+                android:textColor="@color/text_muted"
+                android:layout_marginBottom="8dp" />
+
+            <EditText
+                android:id="@+id/etInviteCode"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:background="@drawable/bg_input"
+                android:paddingLeft="14dp"
+                android:paddingRight="14dp"
+                android:hint="e.g. 482910"
+                android:textSize="18sp"
+                android:textColor="@color/navy"
+                android:inputType="number"
+                android:maxLength="6"
+                android:layout_marginBottom="24dp" />
+
+        </LinearLayout>
+
+        <!-- Divider -->
+        <View android:layout_width="match_parent" android:layout_height="1dp" android:background="@color/border" android:layout_marginBottom="24dp" />
+
+        <!-- Create account button -->
+        <TextView android:id="@+id/btnCreateAccount" android:layout_width="match_parent" android:layout_height="52dp" android:text="Create account" android:textSize="16sp" android:textStyle="bold" android:textColor="@color/white" android:background="@drawable/bg_button_primary" android:gravity="center" android:layout_marginBottom="20dp" android:clickable="true" android:focusable="true" />
+
+        <!-- Already have account -->
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center">
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Already have an account? " android:textSize="14sp" android:textColor="@color/text_muted" />
+            <TextView android:id="@+id/tvGoToSignIn" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Sign in" android:textSize="14sp" android:textStyle="bold" android:textColor="@color/blue_primary" android:clickable="true" android:focusable="true" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>
