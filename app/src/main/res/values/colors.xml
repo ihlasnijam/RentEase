@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- ── Core brand colors ── -->
+    <color name="blue_primary">#1A56DB</color>
+    <color name="blue_dark">#0F172A</color>
+    <color name="blue_light">#EFF6FF</color>
+    <color name="blue_light_bg">#EFF6FF</color>
+    <color name="navy">#0F172A</color>
+    <color name="white">#FFFFFF</color>
+
+    <!-- ── Semantic colors ── -->
+    <color name="green">#22C55E</color>
+    <color name="green_dark">#15803D</color>
+    <color name="amber">#F59E0B</color>
+    <color name="amber_dark">#B45309</color>
+    <color name="red">#EF4444</color>
+    <color name="red_dark">#B91C1C</color>
+    <color name="red_light">#FEE2E2</color>
+    <color name="purple">#8B5CF6</color>
+
+    <!-- ── UI surface / text ── -->
+    <color name="surface_page">#F8FAFC</color>
+    <color name="text_muted">#64748B</color>
+    <color name="border">#E2E8F0</color>
+
+</resources>
