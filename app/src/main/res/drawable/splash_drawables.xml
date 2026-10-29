@@ -1,0 +1,27 @@
+<!-- ═══════════════════════════════════════════════════
+     Create each block as a separate file in res/drawable
+     ═══════════════════════════════════════════════════ -->
+
+
+<!-- ── bg_splash_logo.xml ── -->
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="oval">
+    <solid android:color="@color/white" />
+</shape>
+
+
+<!-- ── bg_dot_active.xml ── -->
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="oval">
+    <solid android:color="@color/white" />
+</shape>
+
+
+<!-- ── bg_dot_inactive.xml ── -->
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="oval">
+    <solid android:color="#5B9BD5" />
+</shape>
