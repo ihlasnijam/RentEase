@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RentEase Admin</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#F8FAFC;color:#0F172A}
+#loginScreen{display:flex;align-items:center;justify-content:center;min-height:100vh;background:linear-gradient(135deg,#1A56DB,#0F172A)}
+.login-card{background:white;border-radius:20px;padding:40px;width:400px;box-shadow:0 25px 80px rgba(0,0,0,.4)}
+.login-card h1{font-size:22px;margin-bottom:4px}
+.login-card p{font-size:13px;color:#64748B;margin-bottom:24px}
+.field{margin-bottom:14px}
+.field label{display:block;font-size:12px;font-weight:600;color:#64748B;margin-bottom:6px;text-transform:uppercase;letter-spacing:.5px}
+.field input{width:100%;padding:13px 16px;border:1.5px solid #E2E8F0;border-radius:10px;font-size:14px;outline:none;transition:.2s}
+.field input:focus{border-color:#1A56DB}
+.btn-blue{width:100%;padding:14px;background:#1A56DB;color:white;border:none;border-radius:10px;font-size:15px;font-weight:600;cursor:pointer;transition:.2s}
+.btn-blue:hover{background:#1344B5}
+.err{color:#EF4444;font-size:13px;margin-top:8px;display:none}
+#dashboard{display:none}
+.topbar{background:#1A56DB;color:white;padding:14px 28px;display:flex;align-items:center;justify-content:space-between}
+.topbar h1{font-size:17px;font-weight:700}
+.sign-out{background:rgba(255,255,255,.2);border:none;color:white;padding:7px 14px;border-radius:8px;cursor:pointer;font-size:13px}
+.sign-out:hover{background:rgba(255,255,255,.3)}
+.tabs{display:flex;background:white;border-bottom:1px solid #E2E8F0;padding:0 28px;overflow-x:auto}
+.tab{padding:14px 18px;font-size:14px;font-weight:500;cursor:pointer;border-bottom:2px solid transparent;color:#64748B;white-space:nowrap}
+.tab.on{color:#1A56DB;border-bottom-color:#1A56DB}
+.page{display:none;padding:28px;max-width:1100px;margin:0 auto}
+.page.on{display:block}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:24px}
+.stat{background:white;border-radius:12px;padding:18px;border:1px solid #E2E8F0}
+.stat .n{font-size:26px;font-weight:700;margin-bottom:3px}
+.stat .l{font-size:12px;color:#64748B}
+h2{font-size:15px;font-weight:700;margin-bottom:14px}
+.card{background:white;border-radius:12px;border:1px solid #E2E8F0;overflow:hidden;margin-bottom:20px}
+table{width:100%;border-collapse:collapse}
+th{background:#F8FAFC;padding:11px 14px;text-align:left;font-size:11px;font-weight:700;color:#64748B;text-transform:uppercase;letter-spacing:.5px}
+td{padding:13px 14px;font-size:13px;border-top:1px solid #F1F5F9;vertical-align:middle}
+tr:hover td{background:#FAFBFC}
+.badge{display:inline-block;padding:3px 9px;border-radius:20px;font-size:11px;font-weight:600}
+.pending{background:#FEF3C7;color:#92400E}
+.approved{background:#D1FAE5;color:#065F46}
+.rejected{background:#FEE2E2;color:#991B1B}
+.open{background:#EFF6FF;color:#1E40AF}
+.inprog{background:#FEF3C7;color:#92400E}
+.resolved{background:#D1FAE5;color:#065F46}
+.btn{padding:6px 12px;border-radius:7px;font-size:12px;font-weight:600;border:none;cursor:pointer;margin-right:5px}
+.btn-view{background:#EFF6FF;color:#1E40AF}.btn-view:hover{background:#DBEAFE}
+.btn-ok{background:#D1FAE5;color:#065F46}.btn-ok:hover{background:#A7F3D0}
+.btn-no{background:#FEE2E2;color:#991B1B}.btn-no:hover{background:#FECACA}
+.empty{text-align:center;padding:40px;color:#94A3B8;font-size:13px}
+.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:100;align-items:center;justify-content:center}
+.overlay.on{display:flex}
+.modal{background:white;border-radius:18px;padding:28px;max-width:500px;width:90%;max-height:85vh;overflow-y:auto}
+.modal h2{font-size:17px;margin-bottom:18px}
+.row{display:flex;gap:8px;margin-bottom:8px}
+.row label{min-width:110px;font-size:12px;font-weight:600;color:#64748B}
+.row span{font-size:13px;color:#0F172A}
+.doc-btn{display:inline-block;margin:4px 0;padding:7px 12px;background:#EFF6FF;color:#1A56DB;border-radius:8px;text-decoration:none;font-size:12px;font-weight:600}
+textarea{width:100%;padding:10px;border:1.5px solid #E2E8F0;border-radius:8px;font-size:13px;height:70px;resize:none;outline:none;margin-top:10px}
+.acts{display:flex;gap:8px;margin-top:16px}
+.acts button{flex:1;padding:11px;border-radius:9px;font-size:13px;font-weight:600;border:none;cursor:pointer}
+.loading{text-align:center;padding:32px;color:#94A3B8}
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="loginScreen">
+  <div class="login-card">
+    <h1>🏠 RentEase Admin</h1>
+    <p>Sign in to manage landlords, tenants and requests</p>
+    <div class="field">
+      <label>Admin Email</label>
+      <input id="iEmail" type="email" value="official.rentease@gmail.com" placeholder="official.rentease@gmail.com">
+    </div>
+    <div class="field">
+      <label>Password</label>
+      <input id="iPass" type="password" placeholder="Your Firebase password">
+    </div>
+    <button class="btn-blue" onclick="doLogin()">Sign in to admin panel</button>
+    <div class="err" id="loginErr">Wrong email or password. Try again.</div>
+  </div>
+</div>
+
+<!-- DASHBOARD -->
+<div id="dashboard">
+  <div class="topbar">
+    <h1>🏠 RentEase Admin Panel</h1>
+    <div style="display:flex;align-items:center;gap:12px">
+      <span id="adminLabel" style="font-size:13px;opacity:.8"></span>
+      <button class="sign-out" onclick="doLogout()">Sign out</button>
+    </div>
+  </div>
+
+  <div class="tabs">
+    <div class="tab on"  onclick="showTab(0)">Overview</div>
+    <div class="tab"     onclick="showTab(1)">Verifications</div>
+    <div class="tab"     onclick="showTab(2)">All Users</div>
+    <div class="tab"     onclick="showTab(3)">Maintenance</div>
+    <div class="tab"     onclick="showTab(4)">Payments</div>
+  </div>
+
+  <div id="p0" class="page on">
+    <div class="stats">
+      <div class="stat"><div class="n" id="sUsers"  style="color:#1A56DB">—</div><div class="l">Total users</div></div>
+      <div class="stat"><div class="n" id="sLand"   style="color:#8B5CF6">—</div><div class="l">Landlords</div></div>
+      <div class="stat"><div class="n" id="sTen"    style="color:#22C55E">—</div><div class="l">Tenants</div></div>
+      <div class="stat"><div class="n" id="sPend"   style="color:#F59E0B">—</div><div class="l">Pending verifications</div></div>
+    </div>
+    <div class="stats">
+      <div class="stat"><div class="n" id="sReqs"   style="color:#EF4444">—</div><div class="l">Open requests</div></div>
+      <div class="stat"><div class="n" id="sPays"   style="color:#22C55E">—</div><div class="l">Payments</div></div>
+      <div class="stat"><div class="n" id="sRevenue" style="color:#0F172A">—</div><div class="l">Total revenue</div></div>
+      <div class="stat"><div class="n" id="sCodes"  style="color:#64748B">—</div><div class="l">Active invite codes</div></div>
+    </div>
+    <h2>⏳ Pending landlord verifications</h2>
+    <div class="card" id="overviewPend"><div class="loading">Loading...</div></div>
+  </div>
+
+  <div id="p1" class="page">
+    <h2>Landlord verification requests</h2>
+    <div class="card" id="verifTable"><div class="loading">Loading...</div></div>
+  </div>
+
+  <div id="p2" class="page">
+    <h2>All registered users</h2>
+    <div class="card" id="usersTable"><div class="loading">Loading...</div></div>
+  </div>
+
+  <div id="p3" class="page">
+    <h2>All maintenance requests</h2>
+    <div class="card" id="maintTable"><div class="loading">Loading...</div></div>
+  </div>
+
+  <div id="p4" class="page">
+    <h2>All payments</h2>
+    <div class="card" id="payTable"><div class="loading">Loading...</div></div>
+  </div>
+</div>
+
+<!-- VERIFY MODAL -->
+<div class="overlay" id="modal">
+  <div class="modal">
+    <h2 id="mTitle">Review landlord</h2>
+    <div class="row"><label>Name</label>     <span id="mName">—</span></div>
+    <div class="row"><label>Email</label>    <span id="mEmail">—</span></div>
+    <div class="row"><label>Phone</label>    <span id="mPhone">—</span></div>
+    <div class="row"><label>Emirates ID</label><span id="mEid">—</span></div>
+    <div class="row"><label>Property</label> <span id="mProp">—</span></div>
+    <div class="row"><label>Submitted</label><span id="mDate">—</span></div>
+    <div class="row"><label>Status</label>   <span id="mStatus">—</span></div>
+    <div style="margin:10px 0">
+      <a id="mEidLink"  class="doc-btn" target="_blank">📋 View Emirates ID</a>
+      <a id="mDeedLink" class="doc-btn" target="_blank" style="margin-left:8px">📄 View Title Deed</a>
+    </div>
+    <div style="font-size:12px;font-weight:600;color:#64748B;margin-top:12px">Admin note (required when rejecting)</div>
+    <textarea id="mNote" placeholder="Enter reason for rejection, or any notes for approval..."></textarea>
+    <div class="acts">
+      <button onclick="doApprove()" style="background:#D1FAE5;color:#065F46">✅ Approve</button>
+      <button onclick="doReject()"  style="background:#FEE2E2;color:#991B1B">❌ Reject</button>
+      <button onclick="closeModal()" style="background:#F1F5F9;color:#64748B">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<!-- IMPORTANT: Replace the firebaseConfig below with your actual config -->
+<!-- Get it from: Firebase Console → Project Settings → Your apps → Web app config -->
+<script type="module">
+
+import { initializeApp }   from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged }
+                           from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+import { getFirestore, collection, getDocs, doc, updateDoc, setDoc, getDoc }
+                           from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+// ─── PASTE YOUR FIREBASE CONFIG HERE ────────────────────────────────────────
+const cfg = {
+  apiKey:            "PASTE_YOUR_API_KEY_HERE",
+  authDomain:        "PASTE_YOUR_AUTH_DOMAIN_HERE",
+  projectId:         "PASTE_YOUR_PROJECT_ID_HERE",
+  storageBucket:     "PASTE_YOUR_STORAGE_BUCKET_HERE",
+  messagingSenderId: "PASTE_YOUR_SENDER_ID_HERE",
+  appId:             "PASTE_YOUR_APP_ID_HERE"
+};
+// ─────────────────────────────────────────────────────────────────────────────
+
+const app  = initializeApp(cfg);
+const auth = getAuth(app);
+const db   = getFirestore(app);
+
+let currentUid = "";
+
+// ── Auth state ────────────────────────────────────────────────────────────────
+onAuthStateChanged(auth, user => {
+  if (user && user.email === "official.rentease@gmail.com") {
+    document.getElementById("loginScreen").style.display  = "none";
+    document.getElementById("dashboard").style.display    = "block";
+    document.getElementById("adminLabel").textContent     = user.email;
+    loadAll();
+  } else {
+    document.getElementById("loginScreen").style.display  = "flex";
+    document.getElementById("dashboard").style.display    = "none";
+  }
+});
+
+window.doLogin = async () => {
+  const email = document.getElementById("iEmail").value.trim();
+  const pass  = document.getElementById("iPass").value.trim();
+  const errEl = document.getElementById("loginErr");
+  errEl.style.display = "none";
+
+  if (email !== "official.rentease@gmail.com") {
+    errEl.textContent   = "Only the admin email can access this panel.";
+    errEl.style.display = "block";
+    return;
+  }
+  try {
+    await signInWithEmailAndPassword(auth, email, pass);
+  } catch(e) {
+    errEl.textContent   = "Wrong password. Check and try again.";
+    errEl.style.display = "block";
+  }
+};
+
+window.doLogout = () => signOut(auth);
+
+// ── Tabs ──────────────────────────────────────────────────────────────────────
+window.showTab = (n) => {
+  document.querySelectorAll(".tab").forEach((t,i) => t.classList.toggle("on", i===n));
+  document.querySelectorAll(".page").forEach((p,i) => p.classList.toggle("on", i===n));
+};
+
+// ── Load all data ─────────────────────────────────────────────────────────────
+async function loadAll() {
+  await Promise.all([loadOverview(), loadVerifs(), loadUsers(), loadMaint(), loadPays()]);
+}
+
+// ── Overview ──────────────────────────────────────────────────────────────────
+async function loadOverview() {
+  const [users, reqs, pays, verifs, codes] = await Promise.all([
+    getDocs(collection(db,"users")),
+    getDocs(collection(db,"maintenanceRequests")),
+    getDocs(collection(db,"payments")),
+    getDocs(collection(db,"landlordVerifications")),
+    getDocs(collection(db,"inviteCodes"))
+  ]);
+
+  const land   = users.docs.filter(d=>d.data().role==="Landlord").length;
+  const ten    = users.docs.filter(d=>d.data().role==="Tenant").length;
+  const pend   = verifs.docs.filter(d=>d.data().status==="pending").length;
+  const open   = reqs.docs.filter(d=>d.data().status!=="Resolved").length;
+  let rev = 0;
+  pays.docs.forEach(d=>{
+    rev += parseFloat((d.data().amount||"0").replace(/[^0-9.]/g,""))||0;
+  });
+  const activeCodes = codes.docs.filter(d=> !d.data().used && (d.data().expiresAt||0) > Date.now()).length;
+
+  set("sUsers",  users.size);
+  set("sLand",   land);
+  set("sTen",    ten);
+  set("sPend",   pend);
+  set("sReqs",   open);
+  set("sPays",   pays.size);
+  set("sRevenue","AED "+rev.toLocaleString("en-AE",{maximumFractionDigits:0}));
+  set("sCodes",  activeCodes);
+
+  const pendDocs = verifs.docs.filter(d=>d.data().status==="pending");
+  const el = document.getElementById("overviewPend");
+  if(!pendDocs.length){ el.innerHTML='<div class="empty">✅ No pending verifications</div>'; return; }
+  el.innerHTML = verifTableHtml(pendDocs, true);
+}
+
+// ── Verifications ─────────────────────────────────────────────────────────────
+async function loadVerifs() {
+  const snap = await getDocs(collection(db,"landlordVerifications"));
+  const el   = document.getElementById("verifTable");
+  if(!snap.size){ el.innerHTML='<div class="empty">No verification requests yet</div>'; return; }
+  const sorted = snap.docs.sort((a,b)=>(b.data().submittedAt||0)-(a.data().submittedAt||0));
+  el.innerHTML = verifTableHtml(sorted, false);
+}
+
+function verifTableHtml(docs, mini) {
+  const rows = docs.map(d=>{
+    const v    = d.data();
+    const date = v.submittedAt ? new Date(v.submittedAt).toLocaleDateString("en-AE") : "—";
+    const st   = v.status||"pending";
+    return `<tr>
+      <td><b>${v.name||"—"}</b><br><span style="color:#64748B;font-size:11px">${v.email||""}</span></td>
+      <td>${v.emiratesIdNumber||"—"}</td>
+      ${mini?"": `<td style="font-size:11px;max-width:160px">${(v.propertyAddress||"—").substring(0,60)}</td>`}
+      <td>${date}</td>
+      <td><span class="badge ${st}">${st}</span></td>
+      <td><button class="btn btn-view" onclick="openModal('${d.id}')">Review</button></td>
+    </tr>`;
+  }).join("");
+  return `<table>
+    <thead><tr>
+      <th>Landlord</th><th>Emirates ID</th>
+      ${mini?"":"<th>Property</th>"}
+      <th>Submitted</th><th>Status</th><th></th>
+    </tr></thead>
+    <tbody>${rows}</tbody>
+  </table>`;
+}
+
+window.openModal = async (uid) => {
+  currentUid = uid;
+  const snap = await getDoc(doc(db,"landlordVerifications",uid));
+  const v    = snap.data()||{};
+
+  set("mTitle",  "Review: "+(v.name||"Landlord"));
+  set("mName",   v.name||"—");
+  set("mEmail",  v.email||"—");
+  set("mPhone",  v.phone||"—");
+  set("mEid",    v.emiratesIdNumber||"—");
+  set("mProp",   v.propertyAddress||"—");
+  set("mStatus", v.status||"pending");
+  set("mDate",   v.submittedAt ? new Date(v.submittedAt).toLocaleString("en-AE") : "—");
+  document.getElementById("mNote").value = v.adminNote||"";
+
+  const eidEl  = document.getElementById("mEidLink");
+  const deedEl = document.getElementById("mDeedLink");
+  if(v.emiratesIdUrl){ eidEl.href=v.emiratesIdUrl;  eidEl.style.display="inline-block"; } else { eidEl.style.display="none"; }
+  if(v.titleDeedUrl) { deedEl.href=v.titleDeedUrl; deedEl.style.display="inline-block"; } else { deedEl.style.display="none"; }
+
+  document.getElementById("modal").classList.add("on");
+};
+
+window.closeModal = () => { document.getElementById("modal").classList.remove("on"); currentUid=""; };
+
+window.doApprove = async () => {
+  if(!currentUid){ alert("No landlord selected."); return; }
+  const note = document.getElementById("mNote").value.trim();
+  try {
+    await updateDoc(doc(db,"landlordVerifications",currentUid), { status:"approved", adminNote:note, reviewedAt:Date.now() });
+    await updateDoc(doc(db,"users",currentUid), { verificationStatus:"approved" });
+    alert("✅ Approved! Landlord can now log in to the full dashboard.");
+    closeModal(); loadAll();
+  } catch(e){ alert("Error: "+e.message+"\n\nMake sure you are signed in and rules are published."); }
+};
+
+window.doReject = async () => {
+  if(!currentUid){ alert("No landlord selected."); return; }
+  const note = document.getElementById("mNote").value.trim();
+  if(!note){ alert("Please enter a rejection reason in the admin note field."); return; }
+  try {
+    await updateDoc(doc(db,"landlordVerifications",currentUid), { status:"rejected", adminNote:note, reviewedAt:Date.now() });
+    await updateDoc(doc(db,"users",currentUid), { verificationStatus:"rejected", adminNote:note });
+    alert("❌ Rejected. Landlord will see the reason in the app.");
+    closeModal(); loadAll();
+  } catch(e){ alert("Error: "+e.message); }
+};
+
+// ── Users ─────────────────────────────────────────────────────────────────────
+async function loadUsers() {
+  const snap = await getDocs(collection(db,"users"));
+  const el   = document.getElementById("usersTable");
+  if(!snap.size){ el.innerHTML='<div class="empty">No users yet</div>'; return; }
+  const rows = snap.docs
+    .sort((a,b)=>(b.data().createdAt||0)-(a.data().createdAt||0))
+    .map(d=>{
+      const u  = d.data();
+      const dt = u.createdAt ? new Date(u.createdAt).toLocaleDateString("en-AE") : "—";
+      const rv = u.role==="Landlord"
+        ? `<span class="badge ${u.verificationStatus||"pending"}">${u.verificationStatus||"pending"}</span>`
+        : `<span class="badge approved">active</span>`;
+      const roleB = u.role==="Landlord" ? "pending" : "open";
+      return `<tr>
+        <td><b>${u.name||"—"}</b></td>
+        <td>${u.email||"—"}</td>
+        <td>${u.phone||"—"}</td>
+        <td><span class="badge ${roleB}">${u.role||"—"}</span></td>
+        <td>${u.unit||"—"}</td>
+        <td>${rv}</td>
+        <td>${dt}</td>
+      </tr>`;
+    }).join("");
+  el.innerHTML=`<table><thead><tr><th>Name</th><th>Email</th><th>Phone</th><th>Role</th><th>Unit</th><th>Status</th><th>Joined</th></tr></thead><tbody>${rows}</tbody></table>`;
+}
+
+// ── Maintenance ───────────────────────────────────────────────────────────────
+async function loadMaint() {
+  const snap = await getDocs(collection(db,"maintenanceRequests"));
+  const el   = document.getElementById("maintTable");
+  if(!snap.size){ el.innerHTML='<div class="empty">No requests yet</div>'; return; }
+  const rows = snap.docs
+    .sort((a,b)=>(b.data().createdAt||0)-(a.data().createdAt||0))
+    .map(d=>{
+      const r  = d.data();
+      const dt = r.createdAt ? new Date(r.createdAt).toLocaleDateString("en-AE") : "—";
+      const sb = r.status==="Resolved"?"resolved":r.status==="In Progress"?"inprog":"open";
+      const pb = r.priority==="Urgent"?"rejected":r.priority==="Medium"?"pending":"approved";
+      return `<tr>
+        <td><b>${r.tenantName||"—"}</b></td>
+        <td>${r.category||"—"} — ${r.location||""}</td>
+        <td style="max-width:180px;font-size:12px">${(r.description||"").substring(0,70)}${(r.description||"").length>70?"...":""}</td>
+        <td><span class="badge ${pb}">${r.priority||"—"}</span></td>
+        <td><span class="badge ${sb}">${r.status||"Open"}</span></td>
+        <td style="font-size:12px">${r.assignedVendor||"—"}</td>
+        <td>${dt}</td>
+      </tr>`;
+    }).join("");
+  el.innerHTML=`<table><thead><tr><th>Tenant</th><th>Issue</th><th>Description</th><th>Priority</th><th>Status</th><th>Vendor</th><th>Date</th></tr></thead><tbody>${rows}</tbody></table>`;
+}
+
+// ── Payments ──────────────────────────────────────────────────────────────────
+async function loadPays() {
+  const snap = await getDocs(collection(db,"payments"));
+  const el   = document.getElementById("payTable");
+  if(!snap.size){ el.innerHTML='<div class="empty">No payments yet</div>'; return; }
+  let total=0;
+  const rows = snap.docs
+    .sort((a,b)=>(b.data().paidAt||0)-(a.data().paidAt||0))
+    .map(d=>{
+      const p  = d.data();
+      const dt = p.paidAt ? new Date(p.paidAt).toLocaleDateString("en-AE") : "—";
+      total   += parseFloat((p.amount||"0").replace(/[^0-9.]/g,""))||0;
+      return `<tr>
+        <td><b>${p.tenantName||"—"}</b></td>
+        <td>${p.month||"—"}</td>
+        <td><b>${p.amount||"—"}</b></td>
+        <td><span class="badge ${p.status==='Paid'?'approved':'pending'}">${p.status||"—"}</span></td>
+        <td>${dt}</td>
+      </tr>`;
+    }).join("");
+  el.innerHTML=`
+    <div style="padding:14px 16px;background:#F8FAFC;border-bottom:1px solid #E2E8F0;font-weight:600;font-size:14px">
+      Total collected: AED ${total.toLocaleString("en-AE",{maximumFractionDigits:0})}
+    </div>
+    <table><thead><tr><th>Tenant</th><th>Month</th><th>Amount</th><th>Status</th><th>Date</th></tr></thead><tbody>${rows}</tbody></table>`;
+}
+
+function set(id,val){ const el=document.getElementById(id); if(el) el.textContent=val; }
+
+</script>
+</body>
+</html>
