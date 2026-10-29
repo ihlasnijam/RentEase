@@ -1,0 +1,528 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F1F5F9">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="72dp"
+        android:clipToPadding="false">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- ── Top bar ── -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="20dp">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tvGreeting"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Good morning"
+                        android:textSize="13sp"
+                        android:textColor="#64748B" />
+
+                    <TextView
+                        android:id="@+id/tvTenantName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Tenant"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:textColor="#0F172A" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tvAvatar"
+                    android:layout_width="42dp"
+                    android:layout_height="42dp"
+                    android:text="T"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    android:textColor="#1E40AF"
+                    android:background="@drawable/bg_avatar"
+                    android:gravity="center"
+                    android:clickable="true"
+                    android:focusable="true" />
+
+            </LinearLayout>
+
+            <!-- ── Hero card ── -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="14dp"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="0dp"
+                app:cardBackgroundColor="#1A56DB">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="18dp">
+
+                    <TextView
+                        android:id="@+id/tvUnitBuilding"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Loading..."
+                        android:textSize="12sp"
+                        android:textColor="#93C5FD"
+                        android:layout_marginBottom="4dp" />
+
+                    <TextView
+                        android:id="@+id/tvDueLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Rent due this month"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:textColor="#FFFFFF"
+                        android:layout_marginBottom="14dp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:weightSum="2">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical"
+                            android:background="@drawable/bg_hero_chip"
+                            android:padding="12dp"
+                            android:layout_marginEnd="8dp">
+
+                            <TextView
+                                android:id="@+id/tvRentAmount"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="AED 4,500"
+                                android:textSize="17sp"
+                                android:textStyle="bold"
+                                android:textColor="#FFFFFF" />
+
+                            <TextView
+                                android:id="@+id/tvRentMonth"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="This month"
+                                android:textSize="10sp"
+                                android:textColor="#93C5FD"
+                                android:layout_marginTop="2dp" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/chipPayNow"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical"
+                            android:background="@drawable/bg_hero_chip"
+                            android:padding="12dp"
+                            android:clickable="true"
+                            android:focusable="true">
+
+                            <TextView
+                                android:id="@+id/tvPayNowLabel"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Pay now →"
+                                android:textSize="13sp"
+                                android:textStyle="bold"
+                                android:textColor="#FFFFFF" />
+
+                            <TextView
+                                android:id="@+id/tvPayNowSub"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Tap to proceed"
+                                android:textSize="10sp"
+                                android:textColor="#93C5FD"
+                                android:layout_marginTop="2dp" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <!-- ── Metrics row ── -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="2"
+                android:layout_marginBottom="14dp">
+
+                <LinearLayout
+                    android:id="@+id/cardRequests"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:background="@drawable/bg_metric_card"
+                    android:padding="14dp"
+                    android:layout_marginEnd="5dp"
+                    android:clickable="true"
+                    android:focusable="true">
+
+                    <TextView
+                        android:id="@+id/tvOpenCount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0"
+                        android:textSize="22sp"
+                        android:textStyle="bold"
+                        android:textColor="#F59E0B" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Open requests"
+                        android:textSize="11sp"
+                        android:textColor="#64748B" />
+
+                    <TextView
+                        android:id="@+id/tvInProgressBadge"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0 in progress"
+                        android:textSize="10sp"
+                        android:textColor="#92400E"
+                        android:background="@drawable/bg_badge_amber"
+                        android:paddingLeft="7dp"
+                        android:paddingRight="7dp"
+                        android:paddingTop="2dp"
+                        android:paddingBottom="2dp"
+                        android:layout_marginTop="6dp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:background="@drawable/bg_metric_card"
+                    android:padding="14dp"
+                    android:layout_marginStart="5dp">
+
+                    <TextView
+                        android:id="@+id/tvMonthsPaid"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0"
+                        android:textSize="22sp"
+                        android:textStyle="bold"
+                        android:textColor="#10B981" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Months paid"
+                        android:textSize="11sp"
+                        android:textColor="#64748B" />
+
+                    <TextView
+                        android:id="@+id/tvPaymentStatusBadge"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Up to date"
+                        android:textSize="10sp"
+                        android:textColor="#065F46"
+                        android:background="@drawable/bg_badge_green"
+                        android:paddingLeft="7dp"
+                        android:paddingRight="7dp"
+                        android:paddingTop="2dp"
+                        android:paddingBottom="2dp"
+                        android:layout_marginTop="6dp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <!-- ── Quick Actions label ── -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="QUICK ACTIONS"
+                android:textSize="11sp"
+                android:textStyle="bold"
+                android:textColor="#64748B"
+                android:layout_marginBottom="8dp" />
+
+            <!-- Row 1: Report issue + Pay rent -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="2"
+                android:layout_marginBottom="6dp">
+
+                <LinearLayout
+                    android:id="@+id/qaReportIssue"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:background="@drawable/bg_metric_card"
+                    android:padding="14dp"
+                    android:layout_marginEnd="5dp"
+                    android:clickable="true"
+                    android:focusable="true">
+
+                    <TextView
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        android:text="🔧"
+                        android:textSize="18sp"
+                        android:gravity="center"
+                        android:background="@drawable/bg_icon_amber"
+                        android:layout_marginBottom="8dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Report issue"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        android:textColor="#1E293B" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/qaPayRent"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:background="@drawable/bg_metric_card"
+                    android:padding="14dp"
+                    android:layout_marginStart="5dp"
+                    android:clickable="true"
+                    android:focusable="true">
+
+                    <TextView
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        android:text="💳"
+                        android:textSize="18sp"
+                        android:gravity="center"
+                        android:background="@drawable/bg_icon_blue"
+                        android:layout_marginBottom="8dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Pay rent"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        android:textColor="#1E293B" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <!-- Row 2: Message + Documents -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="2"
+                android:layout_marginBottom="6dp">
+
+                <LinearLayout
+                    android:id="@+id/qaMessage"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:background="@drawable/bg_metric_card"
+                    android:padding="14dp"
+                    android:layout_marginEnd="5dp"
+                    android:clickable="true"
+                    android:focusable="true">
+
+                    <TextView
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        android:text="💬"
+                        android:textSize="18sp"
+                        android:gravity="center"
+                        android:background="@drawable/bg_icon_green"
+                        android:layout_marginBottom="8dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Message"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        android:textColor="#1E293B" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/qaDocuments"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:background="@drawable/bg_metric_card"
+                    android:padding="14dp"
+                    android:layout_marginStart="5dp"
+                    android:clickable="true"
+                    android:focusable="true">
+
+                    <TextView
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        android:text="📄"
+                        android:textSize="18sp"
+                        android:gravity="center"
+                        android:background="@drawable/bg_icon_purple"
+                        android:layout_marginBottom="8dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Documents"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        android:textColor="#1E293B" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <!-- ── Row 3: Rent & Bills (full width) ── -->
+            <LinearLayout
+                android:id="@+id/qaRentSplit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:background="@drawable/bg_metric_card"
+                android:padding="14dp"
+                android:layout_marginBottom="14dp"
+                android:clickable="true"
+                android:focusable="true">
+
+                <!-- Icon -->
+                <LinearLayout
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:gravity="center"
+                    android:background="@drawable/bg_icon_teal"
+                    android:layout_marginEnd="12dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="🏠"
+                        android:textSize="18sp" />
+                </LinearLayout>
+
+                <!-- Text -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Rent &amp; Bills"
+                        android:textSize="13sp"
+                        android:textStyle="bold"
+                        android:textColor="#1E293B" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Split rent with roommates · Electricity · Water · Bills"
+                        android:textSize="10sp"
+                        android:textColor="#64748B"
+                        android:layout_marginTop="2dp" />
+
+                </LinearLayout>
+
+                <!-- Arrow -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="→"
+                    android:textSize="18sp"
+                    android:textColor="#1A56DB" />
+
+            </LinearLayout>
+
+            <!-- ── Maintenance updates label ── -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="MAINTENANCE UPDATES"
+                android:textSize="11sp"
+                android:textStyle="bold"
+                android:textColor="#64748B"
+                android:layout_marginBottom="8dp" />
+
+            <!-- ── Maintenance card ── -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="0dp"
+                app:cardBackgroundColor="#FFFFFF">
+
+                <LinearLayout
+                    android:id="@+id/recentMaintenanceContainer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical" />
+
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNav"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:background="@color/navy"
+        app:menu="@menu/bottom_nav_menu"
+        app:labelVisibilityMode="labeled"
+        app:itemIconTint="@color/bottom_nav_tint"
+        app:itemTextColor="@color/bottom_nav_tint"
+        app:elevation="0dp" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

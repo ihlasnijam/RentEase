@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingLeft="24dp"
+        android:paddingRight="24dp"
+        android:paddingTop="80dp"
+        android:paddingBottom="32dp">
+
+        <!-- Logo centered -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_marginBottom="40dp">
+
+            <ImageView
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:src="@drawable/ic_logo_icon"
+                android:scaleType="fitCenter"
+                android:layout_marginBottom="12dp" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Rent" android:textSize="30sp" android:textStyle="bold" android:textColor="@color/navy" />
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Ease" android:textSize="30sp" android:textStyle="bold" android:textColor="@color/blue_primary" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Welcome back" android:textSize="24sp" android:textStyle="bold" android:textColor="@color/navy" android:gravity="center" android:layout_marginBottom="8dp" />
+        <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Sign in to your account" android:textSize="14sp" android:textColor="@color/text_muted" android:gravity="center" android:layout_marginBottom="32dp" />
+
+        <!-- Global error message -->
+        <TextView
+            android:id="@+id/tvLoginError"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textSize="13sp"
+            android:textColor="@color/red"
+            android:background="@drawable/bg_badge_red"
+            android:padding="12dp"
+            android:layout_marginBottom="16dp"
+            android:visibility="gone" />
+
+        <!-- Email -->
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Email address" android:textSize="13sp" android:textStyle="bold" android:textColor="@color/navy" android:layout_marginBottom="8dp" />
+        <EditText
+            android:id="@+id/etEmail"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:background="@drawable/bg_input"
+            android:paddingLeft="14dp"
+            android:paddingRight="14dp"
+            android:hint="you@example.com"
+            android:textSize="14sp"
+            android:textColor="@color/navy"
+            android:inputType="textEmailAddress"
+            android:layout_marginBottom="4dp" />
+
+        <!-- Email error -->
+        <TextView
+            android:id="@+id/tvEmailError"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Invalid email address"
+            android:textSize="12sp"
+            android:textColor="@color/red"
+            android:layout_marginBottom="12dp"
+            android:visibility="gone" />
+
+        <!-- Password -->
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Password" android:textSize="13sp" android:textStyle="bold" android:textColor="@color/navy" android:layout_marginBottom="8dp" />
+
+        <!-- Password row with Show/Hide button -->
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:layout_marginBottom="6dp">
+
+            <EditText
+                android:id="@+id/etPassword"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:background="@drawable/bg_input"
+                android:paddingLeft="14dp"
+                android:paddingRight="70dp"
+                android:hint="Enter your password"
+                android:textSize="14sp"
+                android:textColor="@color/navy"
+                android:inputType="textPassword" />
+
+            <TextView
+                android:id="@+id/tvShowPassword"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Show"
+                android:textSize="13sp"
+                android:textColor="@color/blue_primary"
+                android:layout_gravity="end|center_vertical"
+                android:paddingRight="14dp"
+                android:clickable="true"
+                android:focusable="true" />
+
+        </FrameLayout>
+
+        <!-- Forgot password -->
+        <TextView
+            android:id="@+id/tvForgotPassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Forgot password?"
+            android:textSize="13sp"
+            android:textColor="@color/blue_primary"
+            android:layout_gravity="end"
+            android:layout_marginBottom="28dp"
+            android:clickable="true"
+            android:focusable="true" />
+
+        <!-- Sign in button -->
+        <TextView
+            android:id="@+id/btnSignIn"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:text="Sign in"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:background="@drawable/bg_button_primary"
+            android:gravity="center"
+            android:layout_marginBottom="24dp"
+            android:clickable="true"
+            android:focusable="true" />
+
+        <!-- Divider -->
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center_vertical" android:layout_marginBottom="24dp">
+            <View android:layout_width="0dp" android:layout_height="1dp" android:layout_weight="1" android:background="@color/border" />
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="  or  " android:textSize="13sp" android:textColor="@color/text_muted" />
+            <View android:layout_width="0dp" android:layout_height="1dp" android:layout_weight="1" android:background="@color/border" />
+        </LinearLayout>
+
+        <!-- Sign up link -->
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center">
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Don't have an account? " android:textSize="14sp" android:textColor="@color/text_muted" />
+            <TextView android:id="@+id/tvGoToSignUp" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Sign up" android:textSize="14sp" android:textStyle="bold" android:textColor="@color/blue_primary" android:clickable="true" android:focusable="true" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>

@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingLeft="24dp"
+        android:paddingRight="24dp"
+        android:paddingTop="60dp"
+        android:paddingBottom="40dp">
+
+        <!-- Icon -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="🏢"
+            android:textSize="48sp"
+            android:gravity="center"
+            android:layout_marginBottom="16dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Tell us about your property"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:textColor="@color/navy"
+            android:gravity="center"
+            android:layout_marginBottom="6dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="This information helps us verify your property ownership and set up your landlord account."
+            android:textSize="13sp"
+            android:textColor="@color/text_muted"
+            android:gravity="center"
+            android:layout_marginBottom="28dp" />
+
+        <!-- Building name -->
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Building name" android:textSize="13sp" android:textStyle="bold" android:textColor="@color/navy" android:layout_marginBottom="6dp" />
+        <EditText
+            android:id="@+id/etBuildingName"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:background="@drawable/bg_input"
+            android:paddingLeft="14dp"
+            android:paddingRight="14dp"
+            android:hint="e.g. Al Noor Tower"
+            android:textSize="14sp"
+            android:textColor="@color/navy"
+            android:inputType="textCapWords"
+            android:layout_marginBottom="16dp" />
+
+        <!-- Number of floors -->
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Number of floors" android:textSize="13sp" android:textStyle="bold" android:textColor="@color/navy" android:layout_marginBottom="6dp" />
+        <EditText
+            android:id="@+id/etFloors"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:background="@drawable/bg_input"
+            android:paddingLeft="14dp"
+            android:paddingRight="14dp"
+            android:hint="e.g. 12"
+            android:textSize="14sp"
+            android:textColor="@color/navy"
+            android:inputType="number"
+            android:layout_marginBottom="16dp" />
+
+        <!-- Number of units -->
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Total number of units / apartments" android:textSize="13sp" android:textStyle="bold" android:textColor="@color/navy" android:layout_marginBottom="6dp" />
+        <EditText
+            android:id="@+id/etUnits"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:background="@drawable/bg_input"
+            android:paddingLeft="14dp"
+            android:paddingRight="14dp"
+            android:hint="e.g. 48"
+            android:textSize="14sp"
+            android:textColor="@color/navy"
+            android:inputType="number"
+            android:layout_marginBottom="16dp" />
+
+        <!-- Area / location -->
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Area / location" android:textSize="13sp" android:textStyle="bold" android:textColor="@color/navy" android:layout_marginBottom="6dp" />
+        <EditText
+            android:id="@+id/etArea"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:background="@drawable/bg_input"
+            android:paddingLeft="14dp"
+            android:paddingRight="14dp"
+            android:hint="e.g. Ajman Industrial, Ajman"
+            android:textSize="14sp"
+            android:textColor="@color/navy"
+            android:inputType="textCapWords"
+            android:layout_marginBottom="16dp" />
+
+        <!-- Emirate -->
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Emirate" android:textSize="13sp" android:textStyle="bold" android:textColor="@color/navy" android:layout_marginBottom="6dp" />
+        <android.widget.Spinner
+            android:id="@+id/spinnerEmirate"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:background="@drawable/bg_input"
+            android:paddingLeft="14dp"
+            android:paddingRight="14dp"
+            android:layout_marginBottom="16dp" />
+
+        <!-- Property type -->
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Property type" android:textSize="13sp" android:textStyle="bold" android:textColor="@color/navy" android:layout_marginBottom="10dp" />
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:weightSum="3" android:layout_marginBottom="16dp">
+            <TextView android:id="@+id/typeResidential" android:layout_width="0dp" android:layout_height="48dp" android:layout_weight="1" android:text="Residential" android:textSize="11sp" android:textColor="@color/blue_dark" android:background="@drawable/bg_badge_blue" android:gravity="center" android:layout_marginEnd="6dp" android:clickable="true" android:focusable="true" />
+            <TextView android:id="@+id/typeCommercial"  android:layout_width="0dp" android:layout_height="48dp" android:layout_weight="1" android:text="Commercial"  android:textSize="11sp" android:textColor="@color/text_muted" android:background="@drawable/bg_stat_card" android:gravity="center" android:layout_marginEnd="6dp" android:clickable="true" android:focusable="true" />
+            <TextView android:id="@+id/typeMixed"       android:layout_width="0dp" android:layout_height="48dp" android:layout_weight="1" android:text="Mixed use"   android:textSize="11sp" android:textColor="@color/text_muted" android:background="@drawable/bg_stat_card" android:gravity="center" android:clickable="true" android:focusable="true" />
+        </LinearLayout>
+
+        <!-- Amenities -->
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Amenities (optional)" android:textSize="13sp" android:textStyle="bold" android:textColor="@color/navy" android:layout_marginBottom="10dp" />
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:weightSum="4" android:layout_marginBottom="8dp">
+            <TextView android:id="@+id/amenParking" android:layout_width="0dp" android:layout_height="40dp" android:layout_weight="1" android:text="🅿️ Parking"    android:textSize="10sp" android:textColor="@color/text_muted" android:background="@drawable/bg_stat_card" android:gravity="center" android:layout_marginEnd="6dp" android:clickable="true" android:focusable="true" />
+            <TextView android:id="@+id/amenPool"    android:layout_width="0dp" android:layout_height="40dp" android:layout_weight="1" android:text="🏊 Pool"       android:textSize="10sp" android:textColor="@color/text_muted" android:background="@drawable/bg_stat_card" android:gravity="center" android:layout_marginEnd="6dp" android:clickable="true" android:focusable="true" />
+            <TextView android:id="@+id/amenGym"     android:layout_width="0dp" android:layout_height="40dp" android:layout_weight="1" android:text="💪 Gym"        android:textSize="10sp" android:textColor="@color/text_muted" android:background="@drawable/bg_stat_card" android:gravity="center" android:layout_marginEnd="6dp" android:clickable="true" android:focusable="true" />
+            <TextView android:id="@+id/amenSecurity" android:layout_width="0dp" android:layout_height="40dp" android:layout_weight="1" android:text="🛡️ Security"  android:textSize="10sp" android:textColor="@color/text_muted" android:background="@drawable/bg_stat_card" android:gravity="center" android:clickable="true" android:focusable="true" />
+        </LinearLayout>
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:weightSum="4" android:layout_marginBottom="20dp">
+            <TextView android:id="@+id/amenElevator" android:layout_width="0dp" android:layout_height="40dp" android:layout_weight="1" android:text="🛗 Elevator"   android:textSize="10sp" android:textColor="@color/text_muted" android:background="@drawable/bg_stat_card" android:gravity="center" android:layout_marginEnd="6dp" android:clickable="true" android:focusable="true" />
+            <TextView android:id="@+id/amenCCTV"    android:layout_width="0dp" android:layout_height="40dp" android:layout_weight="1" android:text="📹 CCTV"       android:textSize="10sp" android:textColor="@color/text_muted" android:background="@drawable/bg_stat_card" android:gravity="center" android:layout_marginEnd="6dp" android:clickable="true" android:focusable="true" />
+            <TextView android:id="@+id/amenCentral" android:layout_width="0dp" android:layout_height="40dp" android:layout_weight="1" android:text="❄️ Central AC" android:textSize="10sp" android:textColor="@color/text_muted" android:background="@drawable/bg_stat_card" android:gravity="center" android:layout_marginEnd="6dp" android:clickable="true" android:focusable="true" />
+            <View android:layout_width="0dp" android:layout_height="40dp" android:layout_weight="1" />
+        </LinearLayout>
+
+        <!-- Submit -->
+        <TextView
+            android:id="@+id/btnSaveDetails"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:text="Save and continue"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:background="@drawable/bg_button_primary"
+            android:gravity="center"
+            android:clickable="true"
+            android:focusable="true" />
+
+    </LinearLayout>
+
+</ScrollView>

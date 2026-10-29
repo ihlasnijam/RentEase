@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:background="@color/blue_primary">
+
+    <!-- ── Icon only (SVG vector — no text) ── -->
+    <ImageView
+        android:layout_width="110dp"
+        android:layout_height="110dp"
+        android:src="@drawable/ic_logo_icon"
+        android:scaleType="fitCenter"
+        android:layout_marginBottom="18dp" />
+
+    <!-- ── App name as TextView — always crisp ── -->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginBottom="8dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Rent"
+            android:textSize="36sp"
+            android:textStyle="bold"
+            android:textColor="#FFFFFF" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ease"
+            android:textSize="36sp"
+            android:textStyle="bold"
+            android:textColor="#BFDBFE" />
+
+    </LinearLayout>
+
+    <!-- ── Tagline ── -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Smart rental management"
+        android:textSize="14sp"
+        android:textColor="#93C5FD"
+        android:layout_marginBottom="60dp" />
+
+    <!-- ── Animated dots ── -->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <View
+            android:id="@+id/dot1"
+            android:layout_width="8dp"
+            android:layout_height="8dp"
+            android:background="@drawable/bg_dot_active"
+            android:layout_marginEnd="6dp" />
+
+        <View
+            android:id="@+id/dot2"
+            android:layout_width="8dp"
+            android:layout_height="8dp"
+            android:background="@drawable/bg_dot_inactive"
+            android:layout_marginEnd="6dp" />
+
+        <View
+            android:id="@+id/dot3"
+            android:layout_width="8dp"
+            android:layout_height="8dp"
+            android:background="@drawable/bg_dot_inactive" />
+
+    </LinearLayout>
+
+</LinearLayout>

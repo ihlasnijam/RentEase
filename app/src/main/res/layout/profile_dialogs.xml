@@ -1,0 +1,41 @@
+<!-- ══════════════════════════════════════════════════════
+     File 1: dialog_edit_profile.xml
+     Save as: res/layout/dialog_edit_profile.xml
+     ══════════════════════════════════════════════════════ -->
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="20dp">
+
+    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Full name" android:textSize="13sp" android:textStyle="bold" android:textColor="@color/navy" android:layout_marginBottom="6dp" />
+    <EditText android:id="@+id/etEditName" android:layout_width="match_parent" android:layout_height="50dp" android:background="@drawable/bg_input" android:paddingLeft="12dp" android:paddingRight="12dp" android:textSize="14sp" android:textColor="@color/navy" android:inputType="textPersonName" android:layout_marginBottom="14dp" />
+
+    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Phone number" android:textSize="13sp" android:textStyle="bold" android:textColor="@color/navy" android:layout_marginBottom="6dp" />
+    <EditText android:id="@+id/etEditPhone" android:layout_width="match_parent" android:layout_height="50dp" android:background="@drawable/bg_input" android:paddingLeft="12dp" android:paddingRight="12dp" android:textSize="14sp" android:textColor="@color/navy" android:inputType="phone" />
+
+</LinearLayout>
+
+
+<!-- ══════════════════════════════════════════════════════
+     File 2: dialog_change_password.xml
+     Save as: res/layout/dialog_change_password.xml
+     ══════════════════════════════════════════════════════ -->
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="20dp">
+
+    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Current password" android:textSize="13sp" android:textStyle="bold" android:textColor="@color/navy" android:layout_marginBottom="6dp" />
+    <EditText android:id="@+id/etCurrentPassword" android:layout_width="match_parent" android:layout_height="50dp" android:background="@drawable/bg_input" android:paddingLeft="12dp" android:paddingRight="12dp" android:textSize="14sp" android:textColor="@color/navy" android:inputType="textPassword" android:layout_marginBottom="14dp" />
+
+    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="New password" android:textSize="13sp" android:textStyle="bold" android:textColor="@color/navy" android:layout_marginBottom="6dp" />
+    <EditText android:id="@+id/etNewPassword" android:layout_width="match_parent" android:layout_height="50dp" android:background="@drawable/bg_input" android:paddingLeft="12dp" android:paddingRight="12dp" android:textSize="14sp" android:textColor="@color/navy" android:inputType="textPassword" android:layout_marginBottom="14dp" />
+
+    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Confirm new password" android:textSize="13sp" android:textStyle="bold" android:textColor="@color/navy" android:layout_marginBottom="6dp" />
+    <EditText android:id="@+id/etConfirmNewPassword" android:layout_width="match_parent" android:layout_height="50dp" android:background="@drawable/bg_input" android:paddingLeft="12dp" android:paddingRight="12dp" android:textSize="14sp" android:textColor="@color/navy" android:inputType="textPassword" />
+
+</LinearLayout>

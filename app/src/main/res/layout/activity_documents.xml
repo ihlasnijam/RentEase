@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/surface_page">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="32dp"
+        android:clipToPadding="false">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:paddingTop="48dp"
+            android:paddingBottom="16dp">
+
+            <LinearLayout android:id="@+id/btnBack" android:layout_width="wrap_content" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center_vertical" android:layout_marginBottom="12dp" android:clickable="true" android:focusable="true">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="←" android:textSize="18sp" android:textColor="@color/blue_primary" android:layout_marginEnd="6dp" />
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Back" android:textSize="14sp" android:textColor="@color/blue_primary" />
+            </LinearLayout>
+
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="My documents" android:textSize="22sp" android:textStyle="bold" android:textColor="@color/navy" android:layout_marginBottom="16dp" />
+
+            <!-- Lease -->
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="LEASE" android:textSize="11sp" android:textStyle="bold" android:textColor="@color/text_muted" android:layout_marginBottom="8dp" />
+            <androidx.cardview.widget.CardView android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginBottom="14dp" app:cardCornerRadius="16dp" app:cardElevation="0dp" app:cardBackgroundColor="@color/white">
+                <LinearLayout android:id="@+id/rowLeaseDoc" android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center_vertical" android:padding="14dp" android:background="?attr/selectableItemBackground" android:clickable="true" android:focusable="true">
+                    <ImageView android:layout_width="40dp" android:layout_height="40dp" android:background="@drawable/bg_icon_purple" android:src="@drawable/ic_document" android:padding="10dp" android:layout_marginEnd="12dp" />
+                    <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical">
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Tenancy agreement" android:textSize="13sp" android:textStyle="bold" android:textColor="@color/navy" />
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Jan 2025 – Dec 2025 · PDF" android:textSize="11sp" android:textColor="@color/text_muted" android:layout_marginTop="2dp" />
+                    </LinearLayout>
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Active" android:textSize="10sp" android:textStyle="bold" android:textColor="@color/green_dark" android:background="@drawable/bg_badge_green" android:paddingLeft="8dp" android:paddingRight="8dp" android:paddingTop="3dp" android:paddingBottom="3dp" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- Receipts -->
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="RECEIPTS" android:textSize="11sp" android:textStyle="bold" android:textColor="@color/text_muted" android:layout_marginBottom="8dp" />
+            <androidx.cardview.widget.CardView android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginBottom="14dp" app:cardCornerRadius="16dp" app:cardElevation="0dp" app:cardBackgroundColor="@color/white">
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical">
+                    <LinearLayout android:id="@+id/rowReceiptMarch" android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center_vertical" android:padding="14dp" android:background="?attr/selectableItemBackground" android:clickable="true" android:focusable="true">
+                        <ImageView android:layout_width="40dp" android:layout_height="40dp" android:background="@drawable/bg_icon_green" android:src="@drawable/ic_document" android:padding="10dp" android:layout_marginEnd="12dp" />
+                        <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical">
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Receipt — March 2025" android:textSize="13sp" android:textStyle="bold" android:textColor="@color/navy" />
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="AED 4,500 · Mar 7, 2025" android:textSize="11sp" android:textColor="@color/text_muted" android:layout_marginTop="2dp" />
+                        </LinearLayout>
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="View →" android:textSize="12sp" android:textColor="@color/blue_primary" />
+                    </LinearLayout>
+                    <View android:layout_width="match_parent" android:layout_height="1dp" android:background="@color/border" android:layout_marginHorizontal="14dp" />
+                    <LinearLayout android:id="@+id/rowReceiptFeb" android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center_vertical" android:padding="14dp" android:background="?attr/selectableItemBackground" android:clickable="true" android:focusable="true">
+                        <ImageView android:layout_width="40dp" android:layout_height="40dp" android:background="@drawable/bg_icon_green" android:src="@drawable/ic_document" android:padding="10dp" android:layout_marginEnd="12dp" />
+                        <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical">
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Receipt — February 2025" android:textSize="13sp" android:textStyle="bold" android:textColor="@color/navy" />
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="AED 4,500 · Feb 5, 2025" android:textSize="11sp" android:textColor="@color/text_muted" android:layout_marginTop="2dp" />
+                        </LinearLayout>
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="View →" android:textSize="12sp" android:textColor="@color/blue_primary" />
+                    </LinearLayout>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- Reports -->
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="REPORTS" android:textSize="11sp" android:textStyle="bold" android:textColor="@color/text_muted" android:layout_marginBottom="8dp" />
+            <androidx.cardview.widget.CardView android:layout_width="match_parent" android:layout_height="wrap_content" app:cardCornerRadius="16dp" app:cardElevation="0dp" app:cardBackgroundColor="@color/white">
+                <LinearLayout android:id="@+id/rowMonthlyReport" android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center_vertical" android:padding="14dp" android:background="?attr/selectableItemBackground" android:clickable="true" android:focusable="true">
+                    <ImageView android:layout_width="40dp" android:layout_height="40dp" android:background="@drawable/bg_icon_blue" android:src="@drawable/ic_document" android:padding="10dp" android:layout_marginEnd="12dp" />
+                    <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical">
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Monthly summary — April 2025" android:textSize="13sp" android:textStyle="bold" android:textColor="@color/navy" />
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Auto-generated · PDF" android:textSize="11sp" android:textColor="@color/text_muted" android:layout_marginTop="2dp" />
+                    </LinearLayout>
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="View →" android:textSize="12sp" android:textColor="@color/blue_primary" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

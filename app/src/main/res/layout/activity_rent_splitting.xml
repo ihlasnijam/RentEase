@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/surface_page">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="32dp"
+        android:clipToPadding="false">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:paddingTop="48dp"
+            android:paddingBottom="24dp">
+
+            <!-- Back -->
+            <LinearLayout android:id="@+id/btnBack" android:layout_width="wrap_content" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center_vertical" android:layout_marginBottom="12dp" android:clickable="true" android:focusable="true">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="←" android:textSize="18sp" android:textColor="@color/blue_primary" android:layout_marginEnd="6dp" />
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Back" android:textSize="14sp" android:textColor="@color/blue_primary" />
+            </LinearLayout>
+
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Rent &amp; Bills" android:textSize="22sp" android:textStyle="bold" android:textColor="@color/navy" android:layout_marginBottom="4dp" />
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Split rent and track utility bills with roommates" android:textSize="12sp" android:textColor="@color/text_muted" android:layout_marginBottom="20dp" />
+
+            <!-- ── RENT SPLITTING ── -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="10dp">
+
+                <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="RENT SPLITTING" android:textSize="11sp" android:textStyle="bold" android:textColor="@color/text_muted" />
+
+                <TextView
+                    android:id="@+id/btnSetTotalRent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Set total"
+                    android:textSize="11sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/blue_dark"
+                    android:background="@drawable/bg_badge_blue"
+                    android:paddingLeft="12dp"
+                    android:paddingRight="12dp"
+                    android:paddingTop="6dp"
+                    android:paddingBottom="6dp"
+                    android:layout_marginEnd="8dp"
+                    android:clickable="true"
+                    android:focusable="true" />
+
+                <TextView
+                    android:id="@+id/btnAddRoommate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="+ Roommate"
+                    android:textSize="11sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/white"
+                    android:background="@drawable/bg_button_primary"
+                    android:paddingLeft="12dp"
+                    android:paddingRight="12dp"
+                    android:paddingTop="6dp"
+                    android:paddingBottom="6dp"
+                    android:clickable="true"
+                    android:focusable="true" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/roommatesContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginBottom="24dp" />
+
+            <!-- How it works info box -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/bg_badge_blue"
+                android:padding="14dp"
+                android:layout_marginBottom="24dp">
+
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="💡 How rent splitting works" android:textSize="12sp" android:textStyle="bold" android:textColor="@color/blue_dark" android:layout_marginBottom="6dp" />
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Add your roommates and set the total rent. The app divides it equally between everyone listed. Each person pays their share through the Payments screen. Perfect for shared apartments, flatmates, or family sharing a unit." android:textSize="11sp" android:textColor="@color/blue_dark" />
+
+            </LinearLayout>
+
+            <!-- ── UTILITY BILLS ── -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="10dp">
+
+                <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="UTILITY BILLS" android:textSize="11sp" android:textStyle="bold" android:textColor="@color/text_muted" />
+
+                <TextView
+                    android:id="@+id/btnAddBill"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="+ Add bill"
+                    android:textSize="11sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/white"
+                    android:background="@drawable/bg_button_primary"
+                    android:paddingLeft="12dp"
+                    android:paddingRight="12dp"
+                    android:paddingTop="6dp"
+                    android:paddingBottom="6dp"
+                    android:clickable="true"
+                    android:focusable="true" />
+
+            </LinearLayout>
+
+            <!-- Bill types quick add row -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="4"
+                android:layout_marginBottom="12dp">
+
+                <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical" android:gravity="center" android:background="@drawable/bg_stat_card" android:padding="10dp" android:layout_marginEnd="6dp">
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="⚡" android:textSize="20sp" android:gravity="center" />
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Electricity" android:textSize="9sp" android:textColor="@color/text_muted" android:gravity="center" android:layout_marginTop="4dp" />
+                </LinearLayout>
+
+                <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical" android:gravity="center" android:background="@drawable/bg_stat_card" android:padding="10dp" android:layout_marginEnd="6dp">
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="💧" android:textSize="20sp" android:gravity="center" />
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Water" android:textSize="9sp" android:textColor="@color/text_muted" android:gravity="center" android:layout_marginTop="4dp" />
+                </LinearLayout>
+
+                <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical" android:gravity="center" android:background="@drawable/bg_stat_card" android:padding="10dp" android:layout_marginEnd="6dp">
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="🔥" android:textSize="20sp" android:gravity="center" />
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Gas" android:textSize="9sp" android:textColor="@color/text_muted" android:gravity="center" android:layout_marginTop="4dp" />
+                </LinearLayout>
+
+                <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical" android:gravity="center" android:background="@drawable/bg_stat_card" android:padding="10dp">
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="📶" android:textSize="20sp" android:gravity="center" />
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Internet" android:textSize="9sp" android:textColor="@color/text_muted" android:gravity="center" android:layout_marginTop="4dp" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/billsContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" />
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

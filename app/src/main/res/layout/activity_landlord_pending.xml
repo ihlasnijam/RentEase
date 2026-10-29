@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white">
+
+    <!-- Top accent bar -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="6dp"
+        android:background="@color/blue_primary" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:paddingLeft="32dp"
+        android:paddingRight="32dp">
+
+        <!-- Status icon changes based on status -->
+        <TextView
+            android:id="@+id/tvStatusIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="⏳"
+            android:textSize="64sp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="20dp" />
+
+        <TextView
+            android:id="@+id/tvPendingName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Account under review"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:textColor="@color/navy"
+            android:gravity="center"
+            android:layout_marginBottom="12dp" />
+
+        <!-- Status card — color changes based on status -->
+        <LinearLayout
+            android:id="@+id/statusCard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/bg_badge_blue"
+            android:padding="16dp"
+            android:layout_marginBottom="20dp">
+
+            <TextView
+                android:id="@+id/tvPendingStatus"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Your account is under review. Our team is verifying your details. This usually takes up to 24 hours.\n\nYou will receive an email at the address you signed up with once your account is approved."
+                android:textSize="14sp"
+                android:textColor="@color/blue_dark"
+                android:gravity="center"
+                android:lineSpacingExtra="4dp" />
+
+        </LinearLayout>
+
+        <!-- What happens next steps -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/bg_stat_card"
+            android:padding="16dp"
+            android:layout_marginBottom="24dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="What happens next"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                android:textColor="@color/navy"
+                android:layout_marginBottom="10dp" />
+
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="1. Admin reviews your building details" android:textSize="12sp" android:textColor="@color/text_muted" android:layout_marginBottom="6dp" />
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="2. You receive an email when approved" android:textSize="12sp" android:textColor="@color/text_muted" android:layout_marginBottom="6dp" />
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="3. Tap 'Check status' below to refresh" android:textSize="12sp" android:textColor="@color/text_muted" android:layout_marginBottom="6dp" />
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="4. Your full dashboard unlocks instantly" android:textSize="12sp" android:textColor="@color/text_muted" />
+
+        </LinearLayout>
+
+        <!-- Contact info -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Questions? Contact us at:\nofficial.rentease@gmail.com"
+            android:textSize="12sp"
+            android:textColor="@color/text_muted"
+            android:gravity="center"
+            android:layout_marginBottom="28dp" />
+
+        <!-- Check status button -->
+        <TextView
+            android:id="@+id/btnCheckStatus"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:text="Check approval status"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:background="@drawable/bg_button_primary"
+            android:gravity="center"
+            android:layout_marginBottom="12dp"
+            android:clickable="true"
+            android:focusable="true" />
+
+        <!-- Upload docs button -->
+        <TextView
+            android:id="@+id/btnSubmitDocs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Upload verification documents"
+            android:textSize="14sp"
+            android:textColor="@color/blue_primary"
+            android:gravity="center"
+            android:padding="12dp"
+            android:layout_marginBottom="8dp"
+            android:clickable="true"
+            android:focusable="true" />
+
+        <!-- Sign out -->
+        <TextView
+            android:id="@+id/btnSignOut"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Sign out"
+            android:textSize="13sp"
+            android:textColor="@color/text_muted"
+            android:gravity="center"
+            android:padding="10dp"
+            android:clickable="true"
+            android:focusable="true" />
+
+    </LinearLayout>
+
+</LinearLayout>

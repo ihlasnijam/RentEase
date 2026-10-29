@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white">
+
+    <!-- Top bar -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/white"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:paddingTop="48dp"
+        android:paddingBottom="12dp">
+
+        <LinearLayout android:id="@+id/btnBack" android:layout_width="wrap_content" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center_vertical" android:layout_marginBottom="8dp" android:clickable="true" android:focusable="true">
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="←" android:textSize="18sp" android:textColor="@color/blue_primary" android:layout_marginEnd="6dp" />
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Back" android:textSize="14sp" android:textColor="@color/blue_primary" />
+        </LinearLayout>
+
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Privacy policy &amp; terms" android:textSize="20sp" android:textStyle="bold" android:textColor="@color/navy" />
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Effective date: January 1, 2025" android:textSize="12sp" android:textColor="@color/text_muted" android:layout_marginTop="4dp" />
+
+    </LinearLayout>
+
+    <View android:layout_width="match_parent" android:layout_height="1dp" android:background="@color/border" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- Section 1 -->
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="1. About RentEase" android:textSize="15sp" android:textStyle="bold" android:textColor="@color/navy" android:layout_marginBottom="8dp" android:layout_marginTop="4dp" />
+            <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="RentEase is a digital rental and property management platform designed for the UAE market. The app connects tenants, landlords, and property managers to manage rent payments, maintenance requests, and communication in one place.\n\nOur registered contact: official.rentease@gmail.com" android:textSize="13sp" android:textColor="@color/navy" android:lineSpacingExtra="4dp" android:layout_marginBottom="16dp" />
+
+            <!-- Section 2 -->
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="2. UAE &amp; Dubai RERA regulations" android:textSize="15sp" android:textStyle="bold" android:textColor="@color/navy" android:layout_marginBottom="8dp" />
+            <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="RentEase operates in compliance with the following UAE laws and Dubai regulations:\n\n• Law No. 26 of 2007 — Regulating Real Estate Relationships between landlords and tenants in Dubai\n\n• Law No. 33 of 2008 — Amendments to the Dubai Tenancy Law\n\n• RERA (Real Estate Regulatory Agency) guidelines for rental disputes and property management\n\n• UAE Federal Law No. 5 of 1985 (Civil Transactions Law) governing lease contracts\n\n• Dubai Rental Dispute Settlement Centre (RDSC) — official body for resolving disputes between landlords and tenants" android:textSize="13sp" android:textColor="@color/navy" android:lineSpacingExtra="4dp" android:layout_marginBottom="16dp" />
+
+            <!-- Section 3 -->
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="3. Tenant rights in Dubai" android:textSize="15sp" android:textStyle="bold" android:textColor="@color/navy" android:layout_marginBottom="8dp" />
+            <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="As a tenant in Dubai you have the right to:\n\n• Receive a written tenancy contract registered with Ejari (Dubai's official tenancy registration system)\n\n• Receive at least 90 days notice before any rent increase\n\n• Rent increases must comply with the RERA Rental Index — landlords cannot raise rent more than the index allows\n\n• Receive at least 12 months notice before eviction, and only for reasons permitted under Law 33 of 2008\n\n• Have essential maintenance and repairs carried out by the landlord\n\n• Receive your security deposit back within 30 days of lease end (minus any agreed deductions)\n\n• File a rental dispute with RDSC at the Dubai Courts if your rights are violated" android:textSize="13sp" android:textColor="@color/navy" android:lineSpacingExtra="4dp" android:layout_marginBottom="16dp" />
+
+            <!-- Section 4 -->
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="4. Landlord obligations in Dubai" android:textSize="15sp" android:textStyle="bold" android:textColor="@color/navy" android:layout_marginBottom="8dp" />
+            <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Landlords using RentEase must comply with:\n\n• Registering tenancy contracts on Ejari before occupancy\n\n• Not increasing rent beyond the RERA Rental Index for the area\n\n• Maintaining the property in a condition fit for its intended use\n\n• Giving proper notice for eviction — 12 months for personal use, sale, or major renovation\n\n• Returning security deposits fairly and within legal timeframes\n\n• Not entering the property without tenant consent except in emergencies" android:textSize="13sp" android:textColor="@color/navy" android:lineSpacingExtra="4dp" android:layout_marginBottom="16dp" />
+
+            <!-- Section 5 -->
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="5. Data we collect" android:textSize="15sp" android:textStyle="bold" android:textColor="@color/navy" android:layout_marginBottom="8dp" />
+            <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="RentEase collects the following data:\n\n• Name, email address, phone number during signup\n\n• Role (Tenant or Landlord)\n\n• Maintenance request details you submit\n\n• Messages sent through the app\n\n• Payment records (amount, date, status)\n\n• Device token for push notifications\n\nWe do NOT collect or store actual payment card details. All payment processing is handled through secure demo mode for this version." android:textSize="13sp" android:textColor="@color/navy" android:lineSpacingExtra="4dp" android:layout_marginBottom="16dp" />
+
+            <!-- Section 6 -->
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="6. How we use your data" android:textSize="15sp" android:textStyle="bold" android:textColor="@color/navy" android:layout_marginBottom="8dp" />
+            <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Your data is used to:\n\n• Provide and improve the RentEase service\n\n• Connect tenants with their landlords and property managers\n\n• Send notifications about maintenance, rent, and messages\n\n• Allow landlords to manage their properties and tenants\n\n• Contact you about your account if needed\n\nWe do NOT sell your data to third parties." android:textSize="13sp" android:textColor="@color/navy" android:lineSpacingExtra="4dp" android:layout_marginBottom="16dp" />
+
+            <!-- Section 7 -->
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="7. Data storage and security" android:textSize="15sp" android:textStyle="bold" android:textColor="@color/navy" android:layout_marginBottom="8dp" />
+            <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="All data is stored securely on Google Firebase servers. Firebase is certified to ISO 27001, SOC 1, SOC 2, and SOC 3 standards. Data is encrypted in transit and at rest.\n\nYour password is never stored in plain text — Firebase Authentication handles all credential management securely." android:textSize="13sp" android:textColor="@color/navy" android:lineSpacingExtra="4dp" android:layout_marginBottom="16dp" />
+
+            <!-- Section 8 -->
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="8. Your rights" android:textSize="15sp" android:textStyle="bold" android:textColor="@color/navy" android:layout_marginBottom="8dp" />
+            <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="You have the right to:\n\n• Access your personal data at any time through the Profile section\n\n• Edit your name and phone number in Edit Profile\n\n• Change your password at any time\n\n• Request deletion of your account by emailing official.rentease@gmail.com\n\n• Withdraw your consent to data processing at any time" android:textSize="13sp" android:textColor="@color/navy" android:lineSpacingExtra="4dp" android:layout_marginBottom="16dp" />
+
+            <!-- Section 9 -->
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="9. Invite code system" android:textSize="15sp" android:textStyle="bold" android:textColor="@color/navy" android:layout_marginBottom="8dp" />
+            <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Tenants are added to properties through a landlord-generated invite code. This ensures only verified tenants can access a property's information. Each invite code can only be used once and expires after use." android:textSize="13sp" android:textColor="@color/navy" android:lineSpacingExtra="4dp" android:layout_marginBottom="16dp" />
+
+            <!-- Section 10 -->
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="10. Dispute resolution" android:textSize="15sp" android:textStyle="bold" android:textColor="@color/navy" android:layout_marginBottom="8dp" />
+            <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="RentEase is a facilitating platform and is not a party to the tenancy agreement between landlord and tenant. For rental disputes, tenants and landlords should contact:\n\n• RERA Dubai: www.dubailand.gov.ae\n\n• Rental Dispute Settlement Centre (RDSC): Available at Dubai Courts\n\n• DLD Hotline: 800-4488\n\nFor app-related issues: official.rentease@gmail.com" android:textSize="13sp" android:textColor="@color/navy" android:lineSpacingExtra="4dp" android:layout_marginBottom="16dp" />
+
+            <!-- Section 11 -->
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="11. Changes to this policy" android:textSize="15sp" android:textStyle="bold" android:textColor="@color/navy" android:layout_marginBottom="8dp" />
+            <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="We may update this policy from time to time. You will be notified in the app when significant changes are made. Continued use of RentEase after changes constitutes acceptance of the updated policy." android:textSize="13sp" android:textColor="@color/navy" android:lineSpacingExtra="4dp" android:layout_marginBottom="16dp" />
+
+            <!-- Contact -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/bg_badge_blue"
+                android:padding="14dp"
+                android:layout_marginTop="8dp">
+
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Contact us" android:textSize="14sp" android:textStyle="bold" android:textColor="@color/blue_dark" android:layout_marginBottom="4dp" />
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="official.rentease@gmail.com" android:textSize="13sp" android:textColor="@color/blue_dark" />
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="We respond within 24 hours" android:textSize="12sp" android:textColor="@color/blue_primary" android:layout_marginTop="2dp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

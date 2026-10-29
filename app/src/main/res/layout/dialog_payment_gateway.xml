@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="20dp"
+    android:background="@color/white">
+
+    <!-- Header -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginBottom="20dp">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Secure payment"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="@color/navy" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="April 2025 rent — AED 4,500"
+                android:textSize="13sp"
+                android:textColor="@color/text_muted"
+                android:layout_marginTop="2dp" />
+
+        </LinearLayout>
+
+        <!-- Lock icon badge -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Secure"
+            android:textSize="11sp"
+            android:textStyle="bold"
+            android:textColor="@color/green_dark"
+            android:background="@drawable/bg_badge_green"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp" />
+
+    </LinearLayout>
+
+    <!-- Card number -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Card number"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        android:textColor="@color/navy"
+        android:layout_marginBottom="6dp" />
+
+    <EditText
+        android:id="@+id/etCardNumber"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/bg_input"
+        android:paddingLeft="14dp"
+        android:paddingRight="14dp"
+        android:hint="1234 5678 9012 3456"
+        android:textSize="16sp"
+        android:textColor="@color/navy"
+        android:inputType="number"
+        android:maxLength="16"
+        android:layout_marginBottom="14dp" />
+
+    <!-- Expiry and CVV -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="2"
+        android:layout_marginBottom="14dp">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_marginEnd="8dp">
+
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Expiry date" android:textSize="12sp" android:textStyle="bold" android:textColor="@color/navy" android:layout_marginBottom="6dp" />
+            <EditText android:id="@+id/etExpiry" android:layout_width="match_parent" android:layout_height="50dp" android:background="@drawable/bg_input" android:paddingLeft="14dp" android:paddingRight="14dp" android:hint="MM/YY" android:textSize="14sp" android:textColor="@color/navy" android:inputType="number" android:maxLength="5" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_marginStart="8dp">
+
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="CVV" android:textSize="12sp" android:textStyle="bold" android:textColor="@color/navy" android:layout_marginBottom="6dp" />
+            <EditText android:id="@+id/etCVV" android:layout_width="match_parent" android:layout_height="50dp" android:background="@drawable/bg_input" android:paddingLeft="14dp" android:paddingRight="14dp" android:hint="123" android:textSize="14sp" android:textColor="@color/navy" android:inputType="number" android:maxLength="3" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!-- Cardholder name -->
+    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Cardholder name" android:textSize="12sp" android:textStyle="bold" android:textColor="@color/navy" android:layout_marginBottom="6dp" />
+    <EditText android:id="@+id/etCardName" android:layout_width="match_parent" android:layout_height="50dp" android:background="@drawable/bg_input" android:paddingLeft="14dp" android:paddingRight="14dp" android:hint="Ahmed Salim" android:textSize="14sp" android:textColor="@color/navy" android:inputType="textPersonName" android:layout_marginBottom="20dp" />
+
+    <!-- Pay button -->
+    <TextView
+        android:id="@+id/btnConfirmPayment"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:text="Pay AED 4,500"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:background="@drawable/bg_button_primary"
+        android:gravity="center"
+        android:layout_marginBottom="10dp"
+        android:clickable="true"
+        android:focusable="true" />
+
+    <!-- Cancel -->
+    <TextView
+        android:id="@+id/btnCancelPayment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Cancel"
+        android:textSize="14sp"
+        android:textColor="@color/text_muted"
+        android:gravity="center"
+        android:padding="10dp"
+        android:clickable="true"
+        android:focusable="true" />
+
+    <!-- Security notice -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Demo mode — no real charges will be made"
+        android:textSize="11sp"
+        android:textColor="@color/text_muted"
+        android:gravity="center"
+        android:layout_marginTop="8dp" />
+
+</LinearLayout>

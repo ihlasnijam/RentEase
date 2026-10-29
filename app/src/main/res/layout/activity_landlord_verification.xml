@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingLeft="24dp"
+        android:paddingRight="24dp"
+        android:paddingTop="60dp"
+        android:paddingBottom="40dp">
+
+        <!-- Shield icon -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="🏠"
+            android:textSize="48sp"
+            android:gravity="center"
+            android:layout_marginBottom="16dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Verify your landlord account"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:textColor="@color/navy"
+            android:gravity="center"
+            android:layout_marginBottom="8dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="To protect tenants and comply with UAE regulations, we need to verify your identity and property ownership."
+            android:textSize="13sp"
+            android:textColor="@color/text_muted"
+            android:gravity="center"
+            android:layout_marginBottom="28dp" />
+
+        <!-- Emirates ID number -->
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Emirates ID number" android:textSize="13sp" android:textStyle="bold" android:textColor="@color/navy" android:layout_marginBottom="6dp" />
+        <EditText
+            android:id="@+id/etEmiratesIdNumber"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:background="@drawable/bg_input"
+            android:paddingLeft="14dp"
+            android:paddingRight="14dp"
+            android:hint="784-XXXX-XXXXXXX-X"
+            android:textSize="14sp"
+            android:textColor="@color/navy"
+            android:inputType="number"
+            android:layout_marginBottom="18dp" />
+
+        <!-- Property address -->
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Property address" android:textSize="13sp" android:textStyle="bold" android:textColor="@color/navy" android:layout_marginBottom="6dp" />
+        <EditText
+            android:id="@+id/etPropertyAddress"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:background="@drawable/bg_input"
+            android:paddingLeft="14dp"
+            android:paddingRight="14dp"
+            android:paddingTop="12dp"
+            android:hint="Building name, unit, area, city"
+            android:textSize="14sp"
+            android:textColor="@color/navy"
+            android:inputType="textMultiLine"
+            android:gravity="top"
+            android:layout_marginBottom="20dp" />
+
+        <!-- Upload Emirates ID -->
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Upload Emirates ID (front)" android:textSize="13sp" android:textStyle="bold" android:textColor="@color/navy" android:layout_marginBottom="6dp" />
+        <LinearLayout
+            android:id="@+id/btnUploadEid"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:background="@drawable/bg_upload"
+            android:padding="18dp"
+            android:layout_marginBottom="8dp"
+            android:clickable="true"
+            android:focusable="true">
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="📋  Tap to upload Emirates ID" android:textSize="13sp" android:textStyle="bold" android:textColor="@color/blue_primary" android:gravity="center" />
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="JPG, PNG or PDF accepted" android:textSize="11sp" android:textColor="@color/text_muted" android:layout_marginTop="4dp" />
+        </LinearLayout>
+        <TextView android:id="@+id/tvEidFileName" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textSize="12sp" android:textColor="@color/green_dark" android:layout_marginBottom="18dp" android:visibility="gone" />
+
+        <!-- Upload Title Deed -->
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Upload title deed or RERA certificate" android:textSize="13sp" android:textStyle="bold" android:textColor="@color/navy" android:layout_marginBottom="6dp" />
+        <LinearLayout
+            android:id="@+id/btnUploadDeed"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:background="@drawable/bg_upload"
+            android:padding="18dp"
+            android:layout_marginBottom="8dp"
+            android:clickable="true"
+            android:focusable="true">
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="📄  Tap to upload property document" android:textSize="13sp" android:textStyle="bold" android:textColor="@color/blue_primary" android:gravity="center" />
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Title deed, Ejari certificate or RERA document" android:textSize="11sp" android:textColor="@color/text_muted" android:layout_marginTop="4dp" />
+        </LinearLayout>
+        <TextView android:id="@+id/tvDeedFileName" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textSize="12sp" android:textColor="@color/green_dark" android:layout_marginBottom="24dp" android:visibility="gone" />
+
+        <!-- Info box -->
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:background="@drawable/bg_badge_blue" android:padding="14dp" android:layout_marginBottom="20dp">
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="What happens next" android:textSize="13sp" android:textStyle="bold" android:textColor="@color/blue_dark" android:layout_marginBottom="6dp" />
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="1. We review your documents (within 24 hours)\n2. You receive an email when approved\n3. Your account is fully activated\n\nYour information is kept private and secure." android:textSize="12sp" android:textColor="@color/blue_dark" />
+        </LinearLayout>
+
+        <!-- Progress bar -->
+        <ProgressBar android:id="@+id/pbVerification" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="center" android:indeterminateTint="@color/blue_primary" android:layout_marginBottom="12dp" android:visibility="gone" />
+
+        <!-- Submit -->
+        <TextView
+            android:id="@+id/btnSubmitVerification"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:text="Submit for verification"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:background="@drawable/bg_button_primary"
+            android:gravity="center"
+            android:layout_marginBottom="12dp"
+            android:clickable="true"
+            android:focusable="true" />
+
+        <!-- Skip -->
+        <TextView
+            android:id="@+id/btnSkipForNow"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Skip for now — I'll submit documents later"
+            android:textSize="13sp"
+            android:textColor="@color/text_muted"
+            android:gravity="center"
+            android:padding="10dp"
+            android:clickable="true"
+            android:focusable="true" />
+
+    </LinearLayout>
+
+</ScrollView>

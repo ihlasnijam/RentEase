@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/surface_page">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="72dp"
+        android:clipToPadding="false">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:paddingTop="48dp"
+            android:paddingBottom="16dp">
+
+            <!-- Page title -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Payments"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:textColor="@color/navy"
+                android:layout_marginBottom="16dp" />
+
+            <!-- ══ DUE NOW CARD — big, red, impossible to miss ══ -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="14dp"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="6dp"
+                app:cardBackgroundColor="#DC2626">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="22dp">
+
+                    <!-- DUE NOW badge -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:layout_marginBottom="12dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="🔴  DUE NOW"
+                            android:textSize="11sp"
+                            android:textStyle="bold"
+                            android:textColor="#FCA5A5"
+                            android:background="@drawable/bg_due_badge"
+                            android:paddingLeft="10dp"
+                            android:paddingRight="10dp"
+                            android:paddingTop="5dp"
+                            android:paddingBottom="5dp"
+                            android:layout_marginEnd="10dp" />
+
+                        <TextView
+                            android:id="@+id/tvDueMonth"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="April 2026 rent"
+                            android:textSize="13sp"
+                            android:textColor="#FECACA" />
+
+                    </LinearLayout>
+
+                    <!-- Amount — big and bold -->
+                    <TextView
+                        android:id="@+id/tvDueAmount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="AED 4,500"
+                        android:textSize="38sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/white"
+                        android:layout_marginBottom="4dp" />
+
+                    <!-- Due date -->
+                    <TextView
+                        android:id="@+id/tvDueDate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Due Apr 30, 2026"
+                        android:textSize="13sp"
+                        android:textColor="#FECACA"
+                        android:layout_marginBottom="18dp" />
+
+                    <!-- Pay Now button — white on red -->
+                    <TextView
+                        android:id="@+id/btnPayNow"
+                        android:layout_width="match_parent"
+                        android:layout_height="52dp"
+                        android:text="Pay AED 4,500 now"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:textColor="#DC2626"
+                        android:background="@drawable/bg_pay_button_white"
+                        android:gravity="center"
+                        android:clickable="true"
+                        android:focusable="true" />
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <!-- Paid badge (shown after payment, hidden by default) -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardPaidStatus"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="14dp"
+                android:visibility="gone"
+                app:cardCornerRadius="14dp"
+                app:cardElevation="0dp"
+                app:cardBackgroundColor="#D1FAE5">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="✅"
+                        android:textSize="22sp"
+                        android:layout_marginEnd="12dp" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tvPaidTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="This month is paid"
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+                            android:textColor="#065F46" />
+
+                        <TextView
+                            android:id="@+id/tvPaidSub"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Next payment due in May 2026"
+                            android:textSize="12sp"
+                            android:textColor="#065F46" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <!-- History title -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="PAYMENT HISTORY"
+                android:textSize="11sp"
+                android:textStyle="bold"
+                android:textColor="@color/text_muted"
+                android:layout_marginBottom="10dp" />
+
+            <!-- Loading -->
+            <ProgressBar
+                android:id="@+id/pbPayments"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:indeterminateTint="@color/blue_primary"
+                android:visibility="gone" />
+
+            <!-- History container -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="0dp"
+                app:cardBackgroundColor="@color/white">
+
+                <LinearLayout
+                    android:id="@+id/paymentsContainer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical" />
+
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNav"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:background="@color/navy"
+        app:menu="@menu/bottom_nav_menu"
+        app:labelVisibilityMode="labeled"
+        app:itemIconTint="@color/bottom_nav_tint"
+        app:itemTextColor="@color/bottom_nav_tint"
+        app:elevation="0dp" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/surface_page">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="72dp"
+        android:clipToPadding="false">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:paddingTop="48dp"
+            android:paddingBottom="16dp">
+
+            <!-- Top bar -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="4dp">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tvGreeting"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Good morning"
+                        android:textSize="13sp"
+                        android:textColor="@color/text_muted" />
+
+                    <TextView
+                        android:id="@+id/tvLandlordName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Landlord"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/navy" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Landlord"
+                        android:textSize="12sp"
+                        android:textColor="@color/blue_primary" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tvAvatar"
+                    android:layout_width="42dp"
+                    android:layout_height="42dp"
+                    android:text="L"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/blue_dark"
+                    android:background="@drawable/bg_avatar"
+                    android:gravity="center"
+                    android:clickable="true"
+                    android:focusable="true" />
+
+            </LinearLayout>
+
+            <!-- Hero card -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                android:layout_marginBottom="14dp"
+                app:cardCornerRadius="18dp"
+                app:cardElevation="0dp"
+                app:cardBackgroundColor="@color/blue_primary">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="18dp">
+
+                    <TextView
+                        android:id="@+id/tvCurrentMonth"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="This month"
+                        android:textSize="11sp"
+                        android:textColor="#93C5FD"
+                        android:layout_marginBottom="5dp" />
+
+                    <TextView
+                        android:id="@+id/tvTotalRevenue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="AED 0"
+                        android:textSize="28sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/white"
+                        android:layout_marginBottom="4dp" />
+
+                    <TextView
+                        android:id="@+id/tvPaymentSummary"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Loading..."
+                        android:textSize="12sp"
+                        android:textColor="#BFDBFE"
+                        android:layout_marginBottom="16dp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:weightSum="3">
+
+                        <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical" android:background="@drawable/bg_hero_chip" android:padding="10dp" android:layout_marginEnd="6dp">
+                            <TextView android:id="@+id/tvOccupancyPct" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="0%" android:textSize="16sp" android:textStyle="bold" android:textColor="@color/white" />
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Occupancy" android:textSize="10sp" android:textColor="#93C5FD" android:layout_marginTop="2dp" />
+                        </LinearLayout>
+
+                        <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical" android:background="@drawable/bg_hero_chip" android:padding="10dp" android:layout_marginEnd="6dp">
+                            <TextView android:id="@+id/tvOpenRequestsChip" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="0" android:textSize="16sp" android:textStyle="bold" android:textColor="@color/white" />
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Open requests" android:textSize="10sp" android:textColor="#93C5FD" android:layout_marginTop="2dp" />
+                        </LinearLayout>
+
+                        <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical" android:background="@drawable/bg_hero_chip" android:padding="10dp">
+                            <TextView android:id="@+id/tvTenantsCount" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="0" android:textSize="16sp" android:textStyle="bold" android:textColor="@color/white" />
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Tenants" android:textSize="10sp" android:textColor="#93C5FD" android:layout_marginTop="2dp" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <!-- Stat tiles -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="3"
+                android:layout_marginBottom="16dp">
+
+                <LinearLayout android:id="@+id/cardTotalProperties" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical" android:background="@drawable/bg_stat_card" android:padding="12dp" android:layout_marginEnd="6dp" android:clickable="true" android:focusable="true">
+                    <TextView android:id="@+id/tvPropertiesCount" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="0" android:textSize="24sp" android:textStyle="bold" android:textColor="@color/blue_primary" />
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Properties" android:textSize="11sp" android:textColor="@color/text_muted" />
+                </LinearLayout>
+
+                <LinearLayout android:id="@+id/cardOpenRequests" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical" android:background="@drawable/bg_stat_card" android:padding="12dp" android:layout_marginEnd="6dp" android:clickable="true" android:focusable="true">
+                    <TextView android:id="@+id/tvOpenRequestsCount" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="0" android:textSize="24sp" android:textStyle="bold" android:textColor="@color/amber" />
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Requests" android:textSize="11sp" android:textColor="@color/text_muted" />
+                </LinearLayout>
+
+                <LinearLayout android:id="@+id/cardTenants" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical" android:background="@drawable/bg_stat_card" android:padding="12dp" android:clickable="true" android:focusable="true">
+                    <TextView android:id="@+id/tvTenantsStatCount" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="0" android:textSize="24sp" android:textStyle="bold" android:textColor="@color/green" />
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Tenants" android:textSize="11sp" android:textColor="@color/text_muted" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <!-- ── TENANTS SECTION on home screen ── -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="10dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="MY TENANTS"
+                    android:textSize="11sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/text_muted" />
+
+                <TextView
+                    android:id="@+id/btnInviteTenant"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="+ Invite tenant"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/white"
+                    android:background="@drawable/bg_button_primary"
+                    android:paddingLeft="12dp"
+                    android:paddingRight="12dp"
+                    android:paddingTop="6dp"
+                    android:paddingBottom="6dp"
+                    android:clickable="true"
+                    android:focusable="true" />
+
+            </LinearLayout>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="0dp"
+                app:cardBackgroundColor="@color/white">
+
+                <LinearLayout
+                    android:id="@+id/tenantsContainer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tvNoTenants"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="No tenants yet. Tap '+ Invite tenant' to add your first tenant."
+                        android:textSize="13sp"
+                        android:textColor="@color/text_muted"
+                        android:gravity="center"
+                        android:padding="24dp" />
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <!-- Recent maintenance -->
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="RECENT MAINTENANCE" android:textSize="11sp" android:textStyle="bold" android:textColor="@color/text_muted" android:layout_marginBottom="10dp" />
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="0dp"
+                app:cardBackgroundColor="@color/white">
+
+                <LinearLayout
+                    android:id="@+id/recentRequestsContainer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tvNoRequests"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="No maintenance requests yet"
+                        android:textSize="13sp"
+                        android:textColor="@color/text_muted"
+                        android:gravity="center"
+                        android:padding="24dp" />
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNav"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:background="@color/navy"
+        app:menu="@menu/bottom_nav_menu"
+        app:labelVisibilityMode="labeled"
+        app:itemIconTint="@color/bottom_nav_tint"
+        app:itemTextColor="@color/bottom_nav_tint"
+        app:elevation="0dp" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
